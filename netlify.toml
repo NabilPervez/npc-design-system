@@ -1,0 +1,35 @@
+# Netlify configuration — The NPC Design System
+# Static site, no build step. The published root is the repo itself so that
+# index.html can link styles.css, tokens/, assets/ and the ui_kits/ directly.
+
+[build]
+  publish = "."
+  command = ""
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# Long-cache the immutable brand assets and token stylesheets.
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/tokens/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "SAMEORIGIN"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=()"
+
+# Pretty URL for the landing page.
+[[redirects]]
+  from = "/design-system"
+  to = "/index.html"
+  status = 200

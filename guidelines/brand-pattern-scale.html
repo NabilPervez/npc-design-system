@@ -1,0 +1,8 @@
+<!-- @dsCard group="Brand" viewport="700x210" name="Pattern scale — right vs wrong" subtitle="The lattice is a texture; oversizing breaks the identity" -->
+<!DOCTYPE html><html data-theme="dark"><head><meta charset="utf-8"><link rel="stylesheet" href="../styles.css"><script src="card-theme.js"></script>
+<style>body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font-sans)}.row{display:grid;grid-template-columns:1fr 1fr;height:155px}.p{position:relative;overflow:hidden;background:var(--pattern-ground)}.p span.f{position:absolute;inset:0;background-image:var(--pattern-gold);background-repeat:repeat;opacity:var(--pattern-opacity)}.tag{position:absolute;left:10px;top:10px;z-index:2;font-size:.55rem;letter-spacing:1.6px;text-transform:uppercase;padding:3px 8px;border-radius:4px}.cap{font-size:.53rem;letter-spacing:1.4px;text-transform:uppercase;color:var(--text-muted);padding:8px 10px}</style></head>
+<body><div class="row">
+<div class="p"><span class="f" style="background-size:88px auto"></span><span class="tag" style="background:var(--gold-500);color:var(--ink-800)">correct</span></div>
+<div class="p"><span class="f" style="background-image:url(../assets/pattern-gold-tile-2x.png);background-size:300px auto"></span><span class="tag" style="background:var(--ink-700);color:var(--ink-50)">too large</span></div>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr"><div class="cap">88px · reads as a woven field</div><div class="cap">300px · reads as big graphic rings</div></div></body></html>

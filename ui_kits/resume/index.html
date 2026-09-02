@@ -1,0 +1,41 @@
+<!-- @dsCard group="Résumé" viewport="1180x820" name="Résumé" subtitle="nabilpervez/resume — hero, experience, sticky sidebar" -->
+<!DOCTYPE html><html lang="en" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nabil Pervez — Award-Winning Product Manager</title>
+<link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/lucide@0.454.0/dist/umd/lucide.js"></script>
+<script src="../../_ds_bundle.js"></script>
+<script src="resume-data.js"></script>
+<style>body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font-sans)}</style>
+</head><body class="npc-grain"><div id="root"></div>
+<script type="text/babel" src="ResumeHero.jsx"></script>
+<script type="text/babel" src="ResumeMain.jsx"></script>
+<script type="text/babel" src="ResumeSidebar.jsx"></script>
+<script type="text/babel">
+const { NavBar, Fab, FabStack } = window.NPCDesignSystem_2f0ecd;
+
+function App(){
+  const [theme, setTheme] = React.useState('dark');
+  React.useEffect(()=>{ document.documentElement.dataset.theme = theme; }, [theme]);
+  React.useEffect(()=>{ if(window.lucide) lucide.createIcons(); });
+  return <>
+    <NavBar links={[{label:'Summary',href:'#hero'},{label:'Experience',href:'#experience'},{label:'AI Web Apps',href:'#projects'},{label:'MarTech',href:'#martech'}]} />
+    <div style={{maxWidth:'var(--page-max)',margin:'0 auto',padding:'calc(var(--sp-24)) var(--page-pad) var(--sp-40)',position:'relative',zIndex:1}}>
+      <ResumeHero />
+      <div style={{display:'grid',gridTemplateColumns:'minmax(0,1fr) var(--sidebar-w)',gap:'0 var(--grid-gap)',alignItems:'start'}}>
+        <div><ExperienceList /><ProjectList /></div>
+        <ResumeSidebar />
+      </div>
+    </div>
+    <FabStack>
+      <Fab title="Toggle light/dark mode" onClick={()=>setTheme(t=>t==='dark'?'light':'dark')}>
+        <i data-lucide={theme==='dark'?'moon':'sun'} style={{width:18,height:18}}></i>
+      </Fab>
+      <Fab title="View / Download Resume" href="https://nabilpervez.com/products"><i data-lucide="download-cloud" style={{width:17,height:17}}></i></Fab>
+    </FabStack>
+  </>;
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script></body></html>

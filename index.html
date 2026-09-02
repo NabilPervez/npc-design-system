@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The NPC Design System</title>
+<meta name="description" content="The brand system for Nabil Pervez Consulting — near-black cool navy ink, one champagne-gold accent, high-contrast serif display type, and hairline structure. Editorial luxury, not SaaS.">
+<link rel="icon" href="assets/monogram-npc-gold-bright.png">
+<meta property="og:title" content="The NPC Design System">
+<meta property="og:description" content="One ground, one accent, one ornament. The complete brand language for Nabil Pervez Consulting, explained and demonstrated.">
+<meta property="og:image" content="assets/brand-card-lockup.png">
+<meta name="theme-color" content="#07101F">
+<link rel="stylesheet" href="styles.css">
+<style>
+/* ─────────────────────────────────────────────────────────────
+   Page shell — layout only. Every value resolves to a token.
+   ───────────────────────────────────────────────────────────── */
+html{scroll-padding-top:calc(var(--nav-h) + 28px)}
+body{overflow-x:hidden}
+img{max-width:100%;display:block}
+::selection{background:var(--gold-dim);color:var(--gold-bright)}
+
+.wrap{max-width:var(--page-max);margin:0 auto;padding:0 var(--page-pad);position:relative;z-index:1}
+@media(max-width:860px){.wrap{padding:0 var(--page-pad-mobile)}}
+
+/* ── Fixed glass nav ─────────────────────────────────────────── */
+.nav{position:fixed;inset:0 0 auto 0;height:var(--nav-h);z-index:40;
+  background:var(--bg-glass);backdrop-filter:var(--blur-glass);-webkit-backdrop-filter:var(--blur-glass);
+  border-bottom:1px solid var(--border);animation:npc-fadeDown .35s var(--ease) both}
+.nav .wrap{display:flex;align-items:center;gap:var(--sp-8);height:100%}
+.nav-brand{display:flex;align-items:center;gap:var(--sp-4);font:var(--fw-light) var(--fs-title-lg)/1 var(--font-wordmark);
+  letter-spacing:.5px;color:var(--text);white-space:nowrap}
+.nav-brand img{height:22px;width:auto}
+.nav-links{display:flex;gap:var(--sp-2);margin-left:auto;align-items:center}
+.nav-links a{font:var(--fw-medium) var(--fs-sm)/1 var(--font-sans);letter-spacing:var(--ls-wider);
+  text-transform:uppercase;color:var(--text-muted);padding:8px 12px;border-radius:var(--radius-md);
+  transition:color var(--dur-fast),background var(--dur-fast)}
+.nav-links a:hover,.nav-links a.active{color:var(--text);background:var(--gold-dim)}
+@media(max-width:900px){.nav-links a:not(.theme-toggle){display:none}}
+.theme-toggle{cursor:pointer;border:1px solid var(--border);background:var(--gold-dim);color:var(--gold);
+  font:var(--fw-semibold) var(--fs-2xs)/1 var(--font-sans);letter-spacing:var(--ls-wider);text-transform:uppercase;
+  padding:7px 14px;border-radius:var(--radius-pill);transition:border-color var(--dur-fast),color var(--dur-fast)}
+.theme-toggle:hover{border-color:var(--border-strong);color:var(--gold-bright)}
+
+/* ── Section scaffolding ─────────────────────────────────────── */
+main{padding-top:var(--nav-h)}
+section{padding:var(--sp-32) 0;border-bottom:1px solid var(--border)}
+section:last-of-type{border-bottom:none}
+.section-head{display:flex;align-items:center;gap:var(--sp-6);margin-bottom:var(--sp-20)}
+.section-head h2{margin:0;font:var(--fw-semibold) var(--fs-title)/1.2 var(--font-serif);
+  text-transform:uppercase;letter-spacing:var(--ls-widest);color:var(--gold);white-space:nowrap}
+.section-head::after{content:'';flex:1;height:1px;background:var(--border)}
+.eyebrow{display:flex;align-items:center;gap:var(--sp-5);font:var(--text-eyebrow);
+  letter-spacing:var(--ls-widest);text-transform:uppercase;color:var(--gold);margin-bottom:var(--sp-7)}
+.eyebrow::before{content:'';display:block;width:32px;height:1px;background:var(--gold)}
+.lead{font:var(--text-lead);color:var(--text-muted);max-width:62ch;border-left:2px solid var(--gold);padding-left:var(--sp-8);margin:var(--sp-8) 0}
+.lead strong{color:var(--text);font-weight:var(--fw-medium)}
+p{max-width:66ch;color:var(--text-muted);font:var(--text-body)}
+p strong{color:var(--text);font-weight:var(--fw-medium)}
+h3.sub{font:var(--fw-semibold) var(--fs-lg)/1.3 var(--font-serif);color:var(--text);
+  text-transform:uppercase;letter-spacing:var(--ls-wide);margin:var(--sp-16) 0 var(--sp-6)}
+a.inline{color:var(--link);border-bottom:1px solid rgba(220,180,80,.35)}
+a.inline:hover{color:var(--text);border-color:var(--gold)}
+
+/* ── Hero ────────────────────────────────────────────────────── */
+.hero{padding:var(--sp-40) 0 var(--sp-32);position:relative;overflow:hidden}
+.hero .wrap{display:grid;gap:var(--sp-8);max-width:calc(var(--page-max) + 0px)}
+.hero h1{margin:0;font:var(--fw-light) var(--fs-display)/var(--lh-display) var(--font-serif);
+  letter-spacing:var(--ls-display);color:var(--text);max-width:16ch}
+.hero h1 em{font-style:italic}
+.hero .meta{font:var(--fw-regular) var(--fs-md)/1 var(--font-sans);letter-spacing:2px;
+  text-transform:uppercase;color:var(--text-muted)}
+.hero-cta{display:flex;gap:var(--sp-5);flex-wrap:wrap;margin-top:var(--sp-6)}
+.hero-pattern{position:absolute;inset:0 60% 0 0;background-image:var(--pattern-gold);
+  background-size:var(--pattern-tile-lg) auto;opacity:var(--pattern-opacity);
+  -webkit-mask-image:linear-gradient(90deg,#000 0%,#000 30%,transparent 92%);
+  mask-image:linear-gradient(90deg,#000 0%,#000 30%,transparent 92%);pointer-events:none;z-index:0}
+
+/* ── Buttons (recreation of components/core/Button) ──────────── */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--sp-3);
+  font:var(--fw-semibold) .78rem/1 var(--font-sans);letter-spacing:var(--ls-wider);
+  text-transform:uppercase;text-decoration:none;padding:11px 26px;border-radius:var(--radius-md);
+  border:1px solid transparent;cursor:pointer;white-space:nowrap;
+  transition:opacity var(--dur-fast),transform var(--dur-fast),background var(--dur-fast),color var(--dur-fast),border-color var(--dur-fast)}
+.btn:hover{transform:translateY(-1px)}
+.btn:active{transform:scale(.985)}
+.btn-primary{background:var(--grad);color:var(--text-on-gold)}
+.btn-primary:hover{opacity:.88;color:var(--text-on-gold)}
+.btn-secondary{background:transparent;color:var(--gold);border-color:var(--border)}
+.btn-secondary:hover{background:var(--gold-dim);border-color:var(--border-strong);color:var(--gold)}
+.btn-sm{padding:5px 12px;font-size:.68rem;letter-spacing:1.1px}
+
+/* ── Cards ───────────────────────────────────────────────────── */
+.card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);
+  padding:var(--card-pad);position:relative;overflow:hidden;
+  transition:transform var(--dur-mid) var(--ease),box-shadow var(--dur-mid) var(--ease),border-color var(--dur-mid) var(--ease),opacity var(--dur-slow) var(--ease)}
+.grid{display:grid;gap:var(--card-gap)}
+.grid-2{grid-template-columns:repeat(2,1fr)}
+.grid-3{grid-template-columns:repeat(3,1fr)}
+.grid-4{grid-template-columns:repeat(4,1fr)}
+.grid-auto{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+@media(max-width:860px){.grid-2,.grid-3,.grid-4{grid-template-columns:1fr}}
+@media(max-width:520px){.grid-4.keep-2,.grid-3.keep-2{grid-template-columns:repeat(2,1fr)}}
+
+/* Hover isolation — the signature interaction */
+.iso.is-hovered .card:not(.is-active){opacity:var(--dim-inactive)}
+.iso .card.is-active{transform:translateY(var(--lift)) scale(var(--scale-active));
+  border-color:var(--border-strong);box-shadow:var(--shadow-card-hover)}
+.iso .card::after{content:'';position:absolute;top:0;left:-100%;width:55%;height:100%;
+  background:var(--shine);transform:skewX(-12deg);transition:left var(--dur-sweep) var(--ease);pointer-events:none}
+.iso .card.is-active::after{left:160%}
+.card h4{margin:0 0 var(--sp-4);font:var(--text-card-title);color:var(--text)}
+.card p{margin:0;font:var(--fw-light) var(--fs-md)/var(--lh-relaxed) var(--font-sans);color:var(--text-muted)}
+.card .metric{color:var(--text-muted);font-weight:var(--fw-semibold);transition:color var(--dur-slow)}
+.iso .card.is-active .metric{color:var(--gold-bright)}
+.card-eyebrow{font:var(--fw-semibold) var(--fs-2xs)/1 var(--font-sans);letter-spacing:var(--ls-widest);
+  text-transform:uppercase;color:var(--gold);margin-bottom:var(--sp-4)}
+
+/* ── Swatches ────────────────────────────────────────────────── */
+.swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(116px,1fr));gap:var(--sp-2)}
+.sw{border-radius:var(--radius-md);height:82px;display:flex;flex-direction:column;justify-content:flex-end;
+  padding:8px 10px;border:1px solid rgba(255,255,255,.04)}
+.sw b{font:var(--fw-semibold) .62rem/1.4 var(--font-sans);letter-spacing:.4px}
+.sw span{font:.58rem/1.4 var(--font-mono);opacity:.72}
+.note{font:var(--fw-regular) var(--fs-sm)/1.5 var(--font-sans);color:var(--text-muted);
+  letter-spacing:.2px;margin-top:var(--sp-6)}
+.note code{color:var(--gold);font-family:var(--font-mono);font-size:.9em}
+
+/* ── Type specimens ─────────────────────────────────────────── */
+.spec{border:1px solid var(--border);border-radius:var(--radius);padding:var(--sp-10) var(--sp-12);margin-bottom:var(--card-gap);background:var(--bg-card)}
+.spec .tag-row{font:var(--fw-semibold) var(--fs-2xs)/1 var(--font-sans);letter-spacing:var(--ls-widest);
+  text-transform:uppercase;color:var(--gold);margin-bottom:var(--sp-6)}
+.type-serif-lg{font:var(--fw-light) 2.6rem/1.1 var(--font-serif);letter-spacing:var(--ls-display);color:var(--text)}
+.type-serif-lg em{font-style:italic}
+.type-sans-body{font:var(--fw-light) var(--fs-lg)/var(--lh-relaxed) var(--font-sans);color:var(--text-muted);max-width:60ch}
+.type-wordmark{font:var(--fw-regular) 2.2rem/1 var(--font-wordmark);letter-spacing:2px;color:var(--text)}
+.scale-row{display:flex;align-items:baseline;gap:var(--sp-8);padding:var(--sp-4) 0;border-bottom:1px solid var(--border)}
+.scale-row:last-child{border-bottom:none}
+.scale-row .k{font:.58rem/1 var(--font-mono);color:var(--gold);width:96px;flex-shrink:0;letter-spacing:.5px}
+.scale-row .v{color:var(--text);font-family:var(--font-serif);font-weight:var(--fw-light);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tracking-demo{display:grid;gap:var(--sp-4)}
+.tracking-demo div{font:var(--fw-medium) var(--fs-sm)/1 var(--font-sans);text-transform:uppercase;color:var(--text)}
+
+/* ── Pattern panel demo ─────────────────────────────────────── */
+.pattern-panel{border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;position:relative;
+  background:var(--bg-card);min-height:240px;display:flex;align-items:center}
+.pattern-panel::before{content:'';position:absolute;inset:0;background-image:var(--pattern-gold);
+  background-size:var(--pattern-tile) auto;opacity:var(--pattern-opacity);
+  -webkit-mask-image:linear-gradient(90deg,#000 0%,#000 34%,transparent 78%);
+  mask-image:linear-gradient(90deg,#000 0%,#000 34%,transparent 78%)}
+.pattern-panel .content{position:relative;padding:var(--sp-20) var(--sp-24);margin-left:auto;max-width:52%}
+@media(max-width:640px){.pattern-panel .content{max-width:100%}}
+.pattern-panel h3{margin:0 0 var(--sp-5);font:var(--fw-light) 1.9rem/1.1 var(--font-serif);letter-spacing:var(--ls-display);color:var(--text)}
+.scale-compare{display:grid;grid-template-columns:1fr 1fr;gap:var(--card-gap)}
+@media(max-width:640px){.scale-compare{grid-template-columns:1fr}}
+.scale-box{border:1px solid var(--border);border-radius:var(--radius);height:150px;position:relative;overflow:hidden}
+.scale-box::before{content:'';position:absolute;inset:0;background-image:var(--pattern-gold);opacity:var(--pattern-opacity)}
+.scale-box.right::before{background-size:var(--pattern-tile) auto}
+.scale-box.wrong::before{background-size:280px auto}
+.scale-box b{position:absolute;left:10px;bottom:8px;font:var(--fw-semibold) var(--fs-2xs)/1 var(--font-sans);
+  letter-spacing:var(--ls-wide);text-transform:uppercase;background:var(--bg);padding:4px 8px;border-radius:var(--radius-sm);border:1px solid var(--border)}
+.scale-box.right b{color:var(--gold)}
+.scale-box.wrong b{color:var(--text-muted)}
+
+/* ── Two-column feature rows ────────────────────────────────── */
+.feature{display:grid;grid-template-columns:1fr 1fr;gap:var(--grid-gap);align-items:center;margin:var(--sp-16) 0}
+@media(max-width:860px){.feature{grid-template-columns:1fr;gap:var(--sp-10)}}
+.chip-list{display:flex;flex-wrap:wrap;gap:var(--sp-2)}
+.chip{font:var(--fw-medium) var(--fs-xs)/1 var(--font-sans);letter-spacing:.4px;padding:6px 11px;
+  border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-muted);
+  transition:color var(--dur-fast),border-color var(--dur-fast)}
+.chip:hover{color:var(--gold);border-color:var(--gold)}
+.chip.pill{border-radius:var(--radius-pill)}
+
+/* ── Stat chips ─────────────────────────────────────────────── */
+.stat{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);
+  padding:var(--sp-8) var(--sp-6);text-align:center}
+.stat b{display:block;font:var(--fw-bold) 1.5rem/1 var(--font-serif);color:var(--text)}
+.stat span{display:block;margin-top:6px;font:var(--fw-semibold) var(--fs-micro)/1.3 var(--font-sans);
+  letter-spacing:var(--ls-wide);text-transform:uppercase;color:var(--text-muted)}
+
+/* ── Motion / easing viz ────────────────────────────────────── */
+.dur-list{display:grid;gap:var(--sp-3)}
+.dur-list div{display:flex;align-items:center;gap:var(--sp-6);font:var(--fw-regular) var(--fs-sm)/1 var(--font-mono);color:var(--text-muted)}
+.dur-list b{color:var(--gold);width:60px;flex-shrink:0}
+.dur-list i{flex:1;height:1px;background:var(--border);position:relative;font-style:normal}
+.dur-list i::after{content:'';position:absolute;left:0;top:-2px;width:5px;height:5px;border-radius:50%;background:var(--gold);
+  animation:slide 3s var(--ease) infinite}
+@keyframes slide{0%{left:0}50%{left:calc(100% - 5px)}100%{left:0}}
+
+/* ── Marks / tints ─────────────────────────────────────────── */
+.mark-ground{border:1px solid var(--border);border-radius:var(--radius);padding:var(--sp-12);
+  display:flex;align-items:center;justify-content:center;gap:var(--sp-12);min-height:120px}
+.mark-ground.ink{background:var(--ink-880)}
+.mark-ground.gold{background:var(--grad-champagne)}
+.mark-ground.paper{background:var(--paper-100)}
+.mark-ground img{height:38px;width:auto}
+.tints-table{width:100%;border-collapse:collapse;font:var(--fw-regular) var(--fs-sm)/1.5 var(--font-sans)}
+.tints-table th{text-align:left;font:var(--fw-semibold) var(--fs-2xs)/1 var(--font-sans);letter-spacing:var(--ls-wide);
+  text-transform:uppercase;color:var(--gold);padding:var(--sp-4) var(--sp-6);border-bottom:1px solid var(--border)}
+.tints-table td{padding:var(--sp-4) var(--sp-6);border-bottom:1px solid var(--border);color:var(--text-muted);vertical-align:top}
+.tints-table td:first-child{color:var(--text);font-family:var(--font-mono);white-space:nowrap}
+.tints-table .dot{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:7px;vertical-align:-1px;border:1px solid rgba(255,255,255,.15)}
+
+.lockup-frame{border:1px solid var(--border);border-radius:var(--radius);background:var(--ink-880);
+  box-shadow:var(--shadow-card);padding:var(--sp-24);display:flex;justify-content:center}
+.lockup-frame img{max-width:340px;width:100%}
+
+/* ── Portrait ──────────────────────────────────────────────── */
+.portrait{width:240px;height:300px;object-fit:cover;border-radius:var(--radius);
+  border:1px solid var(--border);box-shadow:var(--shadow-card);background:var(--bg-card)}
+
+/* ── Callout ───────────────────────────────────────────────── */
+.callout{border:1px solid var(--border);border-left:2px solid var(--gold);border-radius:var(--radius);
+  background:var(--bg-inset);padding:var(--sp-10) var(--sp-12);margin:var(--card-gap) 0}
+.callout h4{margin:0 0 var(--sp-3);font:var(--fw-semibold) var(--fs-md)/1.3 var(--font-sans);
+  letter-spacing:.3px;color:var(--text);text-transform:none}
+.callout p{margin:0;font:var(--fw-light) var(--fs-base)/var(--lh-body) var(--font-sans);color:var(--text-muted)}
+.callout.warn{border-left-color:var(--gold-bright)}
+
+/* ── Caveats list ──────────────────────────────────────────── */
+ol.caveats{counter-reset:c;list-style:none;padding:0;margin:0;display:grid;gap:var(--card-gap)}
+ol.caveats li{counter-increment:c;position:relative;padding-left:var(--sp-16);
+  font:var(--fw-light) var(--fs-md)/var(--lh-body) var(--font-sans);color:var(--text-muted);max-width:74ch}
+ol.caveats li::before{content:counter(c);position:absolute;left:0;top:0;width:24px;height:24px;
+  display:flex;align-items:center;justify-content:center;font:var(--fw-semibold) var(--fs-xs)/1 var(--font-mono);
+  color:var(--gold);border:1px solid var(--border);border-radius:50%}
+ol.caveats li strong{color:var(--text);font-weight:var(--fw-medium)}
+
+/* ── Footer ────────────────────────────────────────────────── */
+footer{padding:var(--sp-24) 0;border-top:1px solid var(--border)}
+footer .wrap{display:flex;justify-content:space-between;align-items:flex-end;gap:var(--sp-16);flex-wrap:wrap}
+footer img{height:40px;width:auto}
+footer .col{display:grid;gap:6px;font:var(--fw-regular) var(--fs-sm)/1.6 var(--font-sans);color:var(--text-muted);text-align:right}
+footer a{color:var(--link)}
+
+/* ── Reveal ────────────────────────────────────────────────── */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity var(--dur-reveal) var(--ease),transform var(--dur-reveal) var(--ease)}
+.reveal.in-view{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}}
+
+.subgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:var(--grid-gap)}
+</style>
+</head>
+<body class="npc-grain">
+
+<nav class="nav">
+  <div class="wrap">
+    <a class="nav-brand" href="#top"><img src="assets/monogram-npc-gold-bright.png" alt="NPC monogram"> Nabil Pervez</a>
+    <div class="nav-links">
+      <a href="#foundations">Foundations</a>
+      <a href="#voice">Voice</a>
+      <a href="#marks">Marks</a>
+      <a href="#components">Components</a>
+      <a href="#kits">Kits</a>
+      <button class="theme-toggle" id="themeToggle" type="button">Light</button>
+    </div>
+  </div>
+</nav>
+
+<main id="top">
+
+  <!-- ── HERO ─────────────────────────────────────────────── -->
+  <header class="hero">
+    <div class="hero-pattern" aria-hidden="true"></div>
+    <div class="wrap">
+      <div class="eyebrow reveal">Brand System · Nabil Pervez Consulting</div>
+      <h1 class="reveal">The <em class="npc-gold-text">NPC</em> Design System</h1>
+      <p class="lead reveal">NPC sells senior judgment to two audiences at once — organizations and individuals. The visual language has to read credible to a Fortune-500 marketing VP and aspirational to a mid-career professional. <strong>It does that with one move: near-black cool navy ink, one champagne-gold accent, high-contrast serif display type, and hairline structure.</strong> Editorial luxury rather than SaaS.</p>
+      <p class="meta reveal">Ink · Champagne · Cormorant · Outfit · Prata</p>
+      <div class="hero-cta reveal">
+        <a class="btn btn-primary" href="#foundations">Explore the Foundations</a>
+        <a class="btn btn-secondary" href="#components">See the Components</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── THE ONE MOVE ─────────────────────────────────────── -->
+  <section id="overview">
+    <div class="wrap">
+      <div class="section-head"><h2>The One Move</h2></div>
+      <div class="subgrid">
+        <div>
+          <h3 class="sub">One ground</h3>
+          <p>Cool navy-black ink — <code style="color:var(--gold);font-family:var(--font-mono)">#07101F</code> on screen, <code style="color:var(--gold);font-family:var(--font-mono)">#0D1522</code> on brand artwork, <code style="color:var(--gold);font-family:var(--font-mono)">#131921</code> in print. Flat, with a fixed 4% fractal-noise grain so it never reads as a default dark mode.</p>
+        </div>
+        <div>
+          <h3 class="sub">One accent</h3>
+          <p>Champagne gold. <code style="color:var(--gold);font-family:var(--font-mono)">#DDB84A</code> on screen, <code style="color:var(--gold);font-family:var(--font-mono)">#AB9563</code> — the measured brand champagne — in print and every mark. No third hue. No blues, greens, or semantic red/amber/green.</p>
+        </div>
+        <div>
+          <h3 class="sub">One ornament</h3>
+          <p>The geometric pattern — interlocking champagne circles. Used <strong>once per view</strong>: a full-bleed band or a split panel. It reads as luxury only because most of the ink is doing nothing.</p>
+        </div>
+      </div>
+      <div class="grid grid-4 keep-2" style="margin-top:var(--sp-16)">
+        <div class="stat"><b>10+</b><span>Years Experience</span></div>
+        <div class="stat"><b>$5M+</b><span>Portfolio Managed</span></div>
+        <div class="stat"><b>90%</b><span>Client Referral Rate</span></div>
+        <div class="stat"><b>45M</b><span>Views In 4 Months</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOUNDATIONS: COLOR ───────────────────────────────── -->
+  <section id="foundations">
+    <div class="wrap">
+      <div class="section-head"><h2>Colour</h2></div>
+      <p>Text is <code style="color:var(--gold);font-family:var(--font-mono)">#E2EAF4</code> at full strength and <code style="color:var(--gold);font-family:var(--font-mono)">#5E718F</code> muted — and the muted grey carries most of the body copy, which is why the pages read quiet. Emphasis promotes words to full-strength text or to gold, never to a larger size. Light theme inverts to paper with a darker gold that passes AA; the print identity lives in light, so the two modes are equal citizens. <strong>Toggle the theme in the nav to check both.</strong></p>
+
+      <h3 class="sub">Ink ramp — the brand ground</h3>
+      <div class="swatches reveal">
+        <div class="sw" style="background:#07101F;color:#E2EAF4"><b>ink-950</b><span>#07101F</span></div>
+        <div class="sw" style="background:#0B1526;color:#E2EAF4"><b>ink-900</b><span>#0B1526</span></div>
+        <div class="sw" style="background:#0C1829;color:#E2EAF4"><b>ink-850</b><span>#0C1829</span></div>
+        <div class="sw" style="background:#0D1522;color:#E2EAF4"><b>ink-880</b><span>#0D1522</span></div>
+        <div class="sw" style="background:#131921;color:#E2EAF4"><b>ink-800</b><span>#131921</span></div>
+        <div class="sw" style="background:#2C2E35;color:#E2EAF4"><b>ink-700</b><span>#2C2E35</span></div>
+        <div class="sw" style="background:#3A4459;color:#E2EAF4"><b>ink-600</b><span>#3A4459</span></div>
+        <div class="sw" style="background:#5E718F;color:#07101F"><b>ink-500</b><span>#5E718F</span></div>
+        <div class="sw" style="background:#8D9CB4;color:#07101F"><b>ink-300</b><span>#8D9CB4</span></div>
+        <div class="sw" style="background:#C6D0E0;color:#07101F"><b>ink-100</b><span>#C6D0E0</span></div>
+        <div class="sw" style="background:#E2EAF4;color:#07101F"><b>ink-50</b><span>#E2EAF4</span></div>
+      </div>
+      <p class="note"><code>ink-950</code> screen ground · <code>ink-880</code> brand-card ground · <code>ink-800</code> print master · <code>ink-500</code> carries the body copy</p>
+
+      <h3 class="sub">Gold &amp; champagne — the single accent</h3>
+      <div class="swatches reveal">
+        <div class="sw" style="background:#F5D97A;color:#07101F"><b>gold-100</b><span>#F5D97A</span></div>
+        <div class="sw" style="background:#F0CC6A;color:#07101F"><b>gold-200</b><span>#F0CC6A</span></div>
+        <div class="sw" style="background:#DDB84A;color:#07101F"><b>gold-300</b><span>#DDB84A</span></div>
+        <div class="sw" style="background:#C8A84C;color:#07101F"><b>gold-400</b><span>#C8A84C</span></div>
+        <div class="sw" style="background:#AB9563;color:#07101F"><b>gold-500</b><span>#AB9563</span></div>
+        <div class="sw" style="background:#C88B20;color:#07101F"><b>gold-600</b><span>#C88B20</span></div>
+        <div class="sw" style="background:#9A6A10;color:#F8FBFF"><b>gold-700</b><span>#9A6A10</span></div>
+        <div class="sw" style="background:#8A5C08;color:#F8FBFF"><b>gold-800</b><span>#8A5C08</span></div>
+      </div>
+      <p class="note"><code>gold-300</code> screen brand gold · <code>gold-500</code> champagne print master, measured off the lockup + pattern artwork · <code>gold-700</code> light-theme gold, AA on paper · <code>gold-800</code> the only gold that passes AA for marks on paper</p>
+
+      <h3 class="sub">Semantic aliases &amp; gradients</h3>
+      <div class="swatches reveal">
+        <div class="sw" style="background:var(--bg);color:var(--text);border-color:var(--border)"><b>--bg</b><span>page ground</span></div>
+        <div class="sw" style="background:var(--bg-card);color:var(--text);border-color:var(--border)"><b>--bg-card</b><span>surface</span></div>
+        <div class="sw" style="background:var(--bg-glass);color:var(--text);border-color:var(--border)"><b>--bg-glass</b><span>nav / FAB</span></div>
+        <div class="sw" style="background:var(--gold-dim);color:var(--gold);border-color:var(--border)"><b>--gold-dim</b><span>hover fill</span></div>
+        <div class="sw" style="background:var(--grad);color:#07101F"><b>--grad</b><span>gold fill</span></div>
+        <div class="sw" style="background:var(--grad-champagne);color:#07101F"><b>--grad-champagne</b><span>foil sim</span></div>
+        <div class="sw" style="background:var(--bg-card);border:1px solid var(--border);color:var(--text)"><b>--border</b><span>1px gold hairline</span></div>
+        <div class="sw" style="background:var(--bg-card);color:transparent"><b class="npc-gold-text">--grad-text</b><span style="color:var(--text-muted)">shimmer text</span></div>
+      </div>
+      <p class="note">Gradient is reserved for gold fills and gold text — <strong style="color:var(--text)">never a decorative background gradient, never a hue shift.</strong></p>
+    </div>
+  </section>
+
+  <!-- ── TYPOGRAPHY ───────────────────────────────────────── -->
+  <section id="type">
+    <div class="wrap">
+      <div class="section-head"><h2>Type</h2></div>
+      <p>Three faces, strictly separated by job. The root font size is <strong>15px</strong>, not 16 — every rem token assumes it. Wide uppercase letterspacing is the loudest brand tell: if a design feels off-brand, it is usually because a label is set tight.</p>
+
+      <div class="spec reveal">
+        <div class="tag-row">Cormorant Garamond · serif · headlines, card titles, section heads</div>
+        <div class="type-serif-lg">Scaling <em class="npc-gold-text">Creativity</em> through Chaos</div>
+        <p class="note">Weight 300 at display sizes with −1px tracking; 600 uppercase at 2.5px for section heads. <strong style="color:var(--text)">Italic is the brand's emphasis device.</strong></p>
+      </div>
+
+      <div class="spec reveal">
+        <div class="tag-row">Outfit · sans · all body copy, UI, buttons, metrics</div>
+        <div class="type-sans-body">I design, build, host, and manage your digital presence so you can focus on your business. Every claim carries a number — not "grew the account" but "45M views in 4 months."</div>
+        <p class="note">300 for long paragraphs, 500 for inline emphasis, 600–700 for buttons and stat numbers.</p>
+      </div>
+
+      <div class="spec reveal">
+        <div class="tag-row">Prata · display serif · the wordmark lockup only ⚠ substitution</div>
+        <div class="type-wordmark">NABIL PERVEZ</div>
+        <p class="note">Prata stands in for the supplied wordmark face, which is not on Google Fonts. Close in contrast and spirit; not the same terminals.</p>
+      </div>
+
+      <div class="feature">
+        <div class="spec reveal" style="margin:0">
+          <div class="tag-row">Type scale — 15px root</div>
+          <div class="scale-row"><span class="k">--fs-display</span><span class="v" style="font-size:2.4rem">Display</span></div>
+          <div class="scale-row"><span class="k">--fs-title-lg</span><span class="v" style="font-size:1.35rem">Title Large</span></div>
+          <div class="scale-row"><span class="k">--fs-title</span><span class="v" style="font-size:1.05rem">Section / Card Title</span></div>
+          <div class="scale-row"><span class="k">--fs-lg</span><span class="v" style="font-size:.9rem;font-family:var(--font-sans)">Lead paragraph</span></div>
+          <div class="scale-row"><span class="k">--fs-md</span><span class="v" style="font-size:.82rem;font-family:var(--font-sans)">Body copy</span></div>
+          <div class="scale-row"><span class="k">--fs-sm</span><span class="v" style="font-size:.72rem;font-family:var(--font-sans)">Nav, eyebrows</span></div>
+          <div class="scale-row"><span class="k">--fs-micro</span><span class="v" style="font-size:.64rem;font-family:var(--font-sans)">Stat labels</span></div>
+        </div>
+        <div class="spec reveal" style="margin:0">
+          <div class="tag-row">Tracking — the brand tell</div>
+          <div class="tracking-demo">
+            <div style="letter-spacing:2.5px">Eyebrow · Section Head — 2.5px</div>
+            <div style="letter-spacing:1.4px">Navigation Links — 1.4px</div>
+            <div style="letter-spacing:1.2px">Buttons · Stat Labels — 1.2px</div>
+            <div style="letter-spacing:-1px;text-transform:none;font-family:var(--font-serif);font-weight:300;font-size:1.4rem">Display serif — −1px</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── BACKGROUNDS & PATTERN ───────────────────────────── -->
+  <section id="pattern">
+    <div class="wrap">
+      <div class="section-head"><h2>Backgrounds &amp; Pattern</h2></div>
+      <p>Flat ink, plus a fixed fractal-noise overlay at 4% opacity across the whole page — that grain is what keeps the flat dark from looking default. The geometric pattern is the one ornament: interlocking champagne circles, tiled from a seamless 303×303 crop. Use it <strong>once per view</strong>.</p>
+
+      <div class="pattern-panel reveal">
+        <div class="content">
+          <h3>Let's build something worth referring.</h3>
+          <p style="color:var(--text-muted);font:var(--fw-light) var(--fs-md)/var(--lh-relaxed) var(--font-sans);margin-bottom:var(--sp-8)">On the brand card the pattern fills the left third against a completely clear right side. That contrast is the point — content sits on the calm side.</p>
+          <a class="btn btn-primary" href="#">Start a Conversation</a>
+        </div>
+      </div>
+      <p class="note"><code>--pattern-opacity</code> 0.22 on ink for bands and split panels · <code>--pattern-opacity-subtle</code> 0.08 behind copy · on paper it flips to a near-print 0.85 champagne-on-white.</p>
+
+      <h3 class="sub">Scale — right vs wrong</h3>
+      <div class="scale-compare reveal">
+        <div class="scale-box right"><b>88px tile — a woven field</b></div>
+        <div class="scale-box wrong"><b>Oversized — breaks the identity</b></div>
+      </div>
+      <p class="note">The lattice must read as fine texture, not as large graphic circles. Tile sizes: <code>56px</code> cards · <code>88px</code> default · <code>132px</code> full-viewport heroes only.</p>
+    </div>
+  </section>
+
+  <!-- ── LAYOUT ───────────────────────────────────────────── -->
+  <section id="layout">
+    <div class="wrap">
+      <div class="section-head"><h2>Layout</h2></div>
+      <div class="subgrid">
+        <div>
+          <h3 class="sub">The frame</h3>
+          <p>Fixed <strong>1100px</strong> content column, 40px page padding (22px on mobile). A two-column <code>1fr / 260px</code> grid with a 52px gutter and a sticky sidebar. Fixed glass header at <strong>62px</strong>. Section rhythm is 56px.</p>
+        </div>
+        <div>
+          <h3 class="sub">Breakpoints</h3>
+          <p>A single breakpoint at <strong>860px</strong> collapses to one column and reorders stats and skills above the main content. A second at 520px drops the stat grid to 2-up. Utility FABs sit fixed bottom-right at 32px inset.</p>
+        </div>
+      </div>
+      <h3 class="sub">Spacing scale</h3>
+      <div class="chip-list reveal">
+        <span class="chip">3</span><span class="chip">6</span><span class="chip">7</span><span class="chip">10</span><span class="chip">12</span><span class="chip">14</span><span class="chip">16</span><span class="chip">20</span><span class="chip">22</span><span class="chip">24</span><span class="chip">28</span><span class="chip">32</span><span class="chip">36</span><span class="chip">40</span><span class="chip">52</span><span class="chip">56</span><span class="chip">72</span><span class="chip">80</span>
+      </div>
+      <p class="note">Inherited verbatim from the résumé build — <strong style="color:var(--text)">not a 4px grid.</strong> Don't round these to a system.</p>
+    </div>
+  </section>
+
+  <!-- ── SURFACES ─────────────────────────────────────────── -->
+  <section id="surfaces">
+    <div class="wrap">
+      <div class="section-head"><h2>Surfaces &amp; Hairlines</h2></div>
+      <p>Everything is separated by <strong>1px <code style="font-family:var(--font-mono)">rgba(220,180,80,.20)</code></strong> — a gold-tinted hairline, never neutral grey. On hover it strengthens. The one heavier rule in the system is the 2px solid gold left border on lead paragraphs.</p>
+
+      <div class="feature">
+        <div class="card reveal" style="cursor:default">
+          <div class="card-eyebrow">Card anatomy</div>
+          <h4>Flat at rest</h4>
+          <p><code style="font-family:var(--font-mono);color:var(--gold)">--bg-card</code> fill, 1px gold hairline, 10px radius, <strong style="color:var(--text)">and no shadow at rest.</strong> Depth is exclusively a hover signal. That flatness is deliberate — the pages read as a printed document until you touch them.</p>
+        </div>
+        <div class="reveal">
+          <h3 class="sub" style="margin-top:0">Radii</h3>
+          <div class="chip-list">
+            <span class="chip" style="border-radius:5px">5px tags</span>
+            <span class="chip" style="border-radius:6px">6px buttons</span>
+            <span class="chip" style="border-radius:10px">10px cards</span>
+            <span class="chip pill">20px date pills</span>
+            <span class="chip" style="border-radius:50%;width:34px;height:34px;display:inline-flex;align-items:center;justify-content:center;padding:0">50%</span>
+          </div>
+          <h3 class="sub">Shadows</h3>
+          <p style="font:var(--fw-light) var(--fs-base)/var(--lh-body) var(--font-sans)">Outer only; no inset shadows anywhere. <code style="font-family:var(--font-mono);color:var(--gold)">--shadow-card</code> on images and hero frames; a deep shadow plus a 1px gold ring on hovered cards; a single coloured shadow — a gold glow at 35% — on hovered FABs.</p>
+          <h3 class="sub">Blur</h3>
+          <p style="font:var(--fw-light) var(--fs-base)/var(--lh-body) var(--font-sans)">Exactly two places: the fixed nav (<code style="font-family:var(--font-mono);color:var(--gold)">blur(18px) saturate(160%)</code>) and the FABs. Never on cards, never on modals.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── MOTION & HOVER ───────────────────────────────────── -->
+  <section id="motion">
+    <div class="wrap">
+      <div class="section-head"><h2>Motion &amp; Hover</h2></div>
+      <p>One curve for everything: <code style="font-family:var(--font-mono);color:var(--gold)">cubic-bezier(.4, 0, .2, 1)</code>. No bounces, no springs, no overshoot, no parallax. Everything fades and translates a short distance. <code style="font-family:var(--font-mono);color:var(--gold)">prefers-reduced-motion</code> kills all of it, globally.</p>
+
+      <div class="feature">
+        <div class="reveal">
+          <h3 class="sub" style="margin-top:0">Durations</h3>
+          <div class="dur-list">
+            <div><b>0.20s</b><i></i>colour · opacity · FAB scale</div>
+            <div><b>0.25s</b><i></i>card lift &amp; shadow</div>
+            <div><b>0.35s</b><i></i>theme change · sibling dimming</div>
+            <div><b>0.55s</b><i></i>the shine sweep</div>
+            <div><b>0.60s</b><i></i>scroll reveal — fade up 24px</div>
+          </div>
+        </div>
+        <div class="reveal">
+          <h3 class="sub" style="margin-top:0">Hover isolation — the signature interaction</h3>
+          <p style="font:var(--fw-light) var(--fs-base)/var(--lh-body) var(--font-sans)">Hover any card below. Its siblings drop to <strong style="color:var(--text)">0.28 opacity</strong>; the hovered card lifts −2px, scales 1.012, gains the gold border and deep shadow, and a diagonal champagne shine wipes across it. Bolded metrics turn gold. Nothing else on the page moves.</p>
+        </div>
+      </div>
+
+      <div class="grid grid-3 iso reveal" id="isoDemo">
+        <div class="card">
+          <div class="card-eyebrow">Experiential</div>
+          <h4>Houston Outlaws</h4>
+          <p>Directed award-winning campaign with pop-up shops. <span class="metric">10M+ impressions, 10k+ attendees.</span></p>
+        </div>
+        <div class="card">
+          <div class="card-eyebrow">Social Media</div>
+          <h4>Activision Blizzard</h4>
+          <p>Built the 4th most connected TikTok account from scratch. <span class="metric">45M views in 4 months.</span></p>
+        </div>
+        <div class="card">
+          <div class="card-eyebrow">Advertising</div>
+          <h4>Coca-Cola</h4>
+          <p>High-impact advertising campaign across social. <span class="metric">2.2M reach at 50% industry cost.</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── VOICE ────────────────────────────────────────────── -->
+  <section id="voice">
+    <div class="wrap">
+      <div class="section-head"><h2>Voice &amp; Content</h2></div>
+      <p>First person singular, addressed to "you." Nabil writes as himself, not as a company. Confident, plain-spoken, allergic to buzzwords while operating in a buzzword industry. Warmth without softness — nothing is oversold, because the numbers are doing the selling.</p>
+
+      <div class="subgrid" style="margin-top:var(--sp-12)">
+        <div class="callout"><h4>Every claim carries a number</h4><p>The single strongest habit in the copy. Not "scaled the agency" but "$5M portfolio, 90% client referral rate." When you write new copy, find the number or don't make the claim.</p></div>
+        <div class="callout"><h4>Structure: label → promise → proof</h4><p><em style="color:var(--text)">Experiential</em> / <strong>Houston Outlaws</strong> / Directed award-winning campaign with pop-up shops. / <span class="npc-gold-text">10M+ impressions, 10k+ attendees.</span></p></div>
+        <div class="callout"><h4>Contrarian opener, then the fix</h4><p>"Creativity without process is just chaos." "Stop being filtered out." "Marketing is now a technical discipline." State the uncomfortable thing, then the fix.</p></div>
+        <div class="callout"><h4>Named-brand credibility, deliberately</h4><p>Riot Games, LEGO, Coca-Cola, Paramount Pictures, T-Mobile. Client names do work that adjectives can't; the copy leans on them rather than on words like "world-class."</p></div>
+        <div class="callout warn"><h4>Casing</h4><p>Sentence case for sentences. Title Case for headings and division names. ALL CAPS only as a typographic device — eyebrows, nav, buttons — never as emphasis inside a sentence.</p></div>
+        <div class="callout warn"><h4>No emoji. Anywhere.</h4><p>The only non-alphabetic glyphs in use are the gold ★ on awards, the — em-dash bullet marker, and ↗ on outbound links. Middle dot · separates metadata.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── ICONOGRAPHY ─────────────────────────────────────── -->
+  <section id="icons">
+    <div class="wrap">
+      <div class="section-head"><h2>Iconography</h2></div>
+      <div class="feature">
+        <div>
+          <p>The system is <strong>Feather / Lucide</strong>, inlined as stroke SVG — <code style="font-family:var(--font-mono);color:var(--gold)">fill: none</code>, <code style="font-family:var(--font-mono);color:var(--gold)">stroke: currentColor</code>, <code style="font-family:var(--font-mono);color:var(--gold)">stroke-width: 2</code>, round caps and joins.</p>
+          <p style="font:var(--fw-light) var(--fs-base)/var(--lh-body) var(--font-sans)">Sizes: <strong style="color:var(--text)">13px</strong> inside buttons, 17–18px in FABs and contact rows, 20px on division cards. Never larger — icons never become illustration. Colour is always <code style="font-family:var(--font-mono);color:var(--gold)">currentColor</code>. No icon font, no sprite sheet, no PNG icons. Never draw a client logo.</p>
+        </div>
+        <div class="card" style="cursor:default;display:flex;gap:var(--sp-12);flex-wrap:wrap;align-items:center;justify-content:center;color:var(--gold)">
+          <i data-lucide="gem" style="width:20px;height:20px"></i>
+          <i data-lucide="code-2" style="width:20px;height:20px"></i>
+          <i data-lucide="megaphone" style="width:20px;height:20px"></i>
+          <i data-lucide="server" style="width:20px;height:20px"></i>
+          <i data-lucide="user-round" style="width:20px;height:20px"></i>
+          <i data-lucide="compass" style="width:20px;height:20px"></i>
+          <i data-lucide="mail" style="width:20px;height:20px"></i>
+          <i data-lucide="arrow-up-right" style="width:20px;height:20px"></i>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── BRAND MARKS ─────────────────────────────────────── -->
+  <section id="marks">
+    <div class="wrap">
+      <div class="section-head"><h2>Brand Marks</h2></div>
+      <p>No logo was invented for this system. Every mark composes the supplied artwork — the N glyph, the serif "NPC" monogram, and the "NABIL PERVEZ" wordmark — inside containers that are geometry from the existing system.</p>
+
+      <div class="feature">
+        <div class="lockup-frame reveal">
+          <img src="assets/brand-card-lockup.png" alt="The NPC master lockup: N glyph over letterspaced NABIL PERVEZ CONSULTING">
+        </div>
+        <div class="reveal">
+          <h3 class="sub" style="margin-top:0">The master lockup</h3>
+          <p>The N glyph above "NABIL PERVEZ CONSULTING" in widely letterspaced Outfit — the primary signature. In the <code style="font-family:var(--font-mono);color:var(--gold)">type</code> variant, "CONSULTING" is measured at runtime and letterspaced to span the exact width of "NABIL PERVEZ", justified between the N and the Z.</p>
+        </div>
+      </div>
+
+      <h3 class="sub">Same marks, correct tint for each ground</h3>
+      <div class="grid grid-3 reveal">
+        <div class="mark-ground ink">
+          <img src="assets/mark-nebtune-gold-bright.png" alt="N glyph, gold-bright, on ink">
+          <img src="assets/monogram-npc-paper.png" alt="NPC monogram, paper knockout, on ink">
+        </div>
+        <div class="mark-ground gold">
+          <img src="assets/mark-nebtune-ink.png" alt="N glyph, ink, on gold">
+          <img src="assets/monogram-npc-ink.png" alt="NPC monogram, ink, on gold">
+        </div>
+        <div class="mark-ground paper">
+          <img src="assets/mark-nebtune-gold-deep.png" alt="N glyph, gold-deep, on paper">
+          <img src="assets/monogram-npc-gold-deep.png" alt="NPC monogram, gold-deep, on paper">
+        </div>
+      </div>
+
+      <h3 class="sub">Mark tints — pick by ground</h3>
+      <table class="tints-table reveal">
+        <thead><tr><th>Tone</th><th>Hex</th><th>Ground</th></tr></thead>
+        <tbody>
+          <tr><td><span class="dot" style="background:#AB9563"></span>gold</td><td>#AB9563</td><td>The print champagne and the master. Safe on both light and dark.</td></tr>
+          <tr><td><span class="dot" style="background:#DDB84A"></span>gold-bright</td><td>#DDB84A</td><td>Dark grounds — reads livelier than champagne on ink.</td></tr>
+          <tr><td><span class="dot" style="background:#8A5C08"></span>gold-deep</td><td>#8A5C08</td><td>Light grounds. The only gold that passes AA on paper.</td></tr>
+          <tr><td><span class="dot" style="background:#E2EAF4"></span>paper</td><td>#E2EAF4</td><td>Knockout on ink or a dark photograph.</td></tr>
+          <tr><td><span class="dot" style="background:#FFFFFF"></span>white</td><td>#FFFFFF</td><td>Knockout where full contrast is wanted — a gold band, a dark image.</td></tr>
+          <tr><td><span class="dot" style="background:#131921"></span>ink</td><td>#131921</td><td>Anything sitting on a gold fill — the chip variant, foil sims.</td></tr>
+        </tbody>
+      </table>
+
+      <h3 class="sub">Imagery</h3>
+      <div class="feature">
+        <img class="portrait reveal" src="assets/nabil-headshot.jpg" alt="Nabil Pervez portrait, warm tungsten light">
+        <div class="reveal">
+          <p><strong>Warm, not cool.</strong> The portrait is shot in tungsten light — amber bokeh, deep shadow, a tan-and-caramel palette. That warmth is what makes photography sit naturally next to champagne gold; a cool or blue-graded image would fight the palette.</p>
+          <p style="font:var(--fw-light) var(--fs-base)/var(--lh-body) var(--font-sans)">Frames: 10px radius, 1px gold hairline, <code style="font-family:var(--font-mono);color:var(--gold)">--shadow-card</code>, <code style="font-family:var(--font-mono);color:var(--gold)">object-fit: cover</code>. Never tint an image gold. Never put type directly on a photo without the bottom-up ink protection gradient.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── COMPONENTS ──────────────────────────────────────── -->
+  <section id="components">
+    <div class="wrap">
+      <div class="section-head"><h2>Components</h2></div>
+      <p>Nineteen components across four families, exposed on <code style="font-family:var(--font-mono);color:var(--gold)">window.NPCDesignSystem_2f0ecd</code>. Every family has a counterpart in the sources — the résumé, the site copy, or the wordmark asset. The recreations below are built in plain HTML from the same tokens.</p>
+
+      <h3 class="sub">Core — Button, Eyebrow, SectionHead, Divider, Tag, StatChip</h3>
+      <div class="card reveal" style="cursor:default;display:grid;gap:var(--sp-10)">
+        <div style="display:flex;gap:var(--sp-5);flex-wrap:wrap;align-items:center">
+          <a class="btn btn-primary" href="#components">Book Nabil</a>
+          <a class="btn btn-secondary" href="#components">See the Work</a>
+          <a class="btn btn-primary btn-sm" href="#components">Download Kit</a>
+          <a class="inline" href="#components" style="text-transform:uppercase;letter-spacing:var(--ls-tight);font:var(--fw-medium) var(--fs-sm)/1 var(--font-sans)">Explore Company Branding</a>
+        </div>
+        <div class="chip-list">
+          <span class="chip">Strategy</span><span class="chip">Culture</span><span class="chip pill">Tech Ops</span><span class="chip pill">Branding</span>
+        </div>
+        <div class="grid grid-4 keep-2" style="gap:var(--sp-2)">
+          <div class="stat"><b>10+</b><span>Years XP</span></div>
+          <div class="stat"><b>$5M+</b><span>Portfolio</span></div>
+          <div class="stat"><b>90%</b><span>Referral Rate</span></div>
+          <div class="stat"><b>70K</b><span>Largest Live Crowd</span></div>
+        </div>
+      </div>
+
+      <h3 class="sub">Cards — DivisionCard, TalkCard, CaseStudyCard</h3>
+      <div class="grid grid-3 iso reveal">
+        <div class="card">
+          <div style="color:var(--gold);margin-bottom:var(--sp-2)"><i data-lucide="gem" style="width:20px;height:20px"></i></div>
+          <h4>Company Branding</h4>
+          <p>Define your corporate identity, refine your brand voice, and build a legacy that resonates with your audience.</p>
+          <a class="inline" href="#components" style="display:inline-block;margin-top:var(--sp-6);text-transform:uppercase;letter-spacing:var(--ls-tight);font:var(--fw-medium) var(--fs-sm)/1 var(--font-sans)">Explore Company Branding</a>
+        </div>
+        <div class="card">
+          <div class="card-eyebrow">Strategy</div>
+          <h4>The Agile Creative</h4>
+          <p>Creatives hate "process," but they need it to scale. How to use Scrum/Agile to manage design and marketing.</p>
+        </div>
+        <div class="card">
+          <div class="card-eyebrow">IT Service Management</div>
+          <h4>T-Mobile</h4>
+          <p>Led ITSM teams. <span class="metric">Reduced ticket time from 24h to 8h.</span></p>
+        </div>
+      </div>
+
+      <h3 class="sub">Brand &amp; Navigation — Wordmark (11 variants), PatternPanel, LogoWall, NavBar, Fab</h3>
+      <div class="card reveal" style="cursor:default">
+        <div class="card-eyebrow">LogoWall — trusted-by, names in muted uppercase serif</div>
+        <div style="display:flex;flex-wrap:wrap;gap:var(--sp-6) var(--sp-14);font:var(--fw-regular) var(--fs-md)/1 var(--font-serif);text-transform:uppercase;letter-spacing:var(--ls-wide);color:var(--text-muted)">
+          <span>Coca-Cola</span><span>LEGO</span><span>Paramount Pictures</span><span>Red Bull</span><span>Riot Games</span><span>Activision</span><span>Blizzard</span><span>SypherPK</span><span>NACON</span><span>The Kraft Group</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── UI KITS ─────────────────────────────────────────── -->
+  <section id="kits">
+    <div class="wrap">
+      <div class="section-head"><h2>UI Kits</h2></div>
+      <div class="grid grid-2 iso reveal">
+        <a class="card" href="ui_kits/consulting-site/index.html" style="text-decoration:none">
+          <div class="card-eyebrow">Consulting Site</div>
+          <h4>nabilpervezconsulting.com</h4>
+          <p>Three click-through routes: home (hero + trusted-by + divisions), speaker profile (hero + story + six keynote cards), case studies (discipline filter + grid).</p>
+        </a>
+        <a class="card" href="ui_kits/resume/index.html" style="text-decoration:none">
+          <div class="card-eyebrow">Résumé</div>
+          <h4>nabilpervez/resume</h4>
+          <p>Faithful recreation of the résumé repo — the ground truth — including hover isolation, the shine sweep and the live light/dark toggle.</p>
+        </a>
+      </div>
+      <p class="note">Also in the repo: 23 foundation specimen cards under <code>guidelines/</code>, the <code>MarketingPage</code> template, and <code>reference/resume-source.html</code> — a verbatim copy of the upstream repo. Anyone with access should read that repo directly; it is the most complete expression of the brand in code.</p>
+    </div>
+  </section>
+
+  <!-- ── CAVEATS ─────────────────────────────────────────── -->
+  <section id="caveats">
+    <div class="wrap">
+      <div class="section-head"><h2>Caveats</h2></div>
+      <p>Things to fix with real assets. This system was built from the résumé repo, a business-card PDF, five artwork files and the site copy — some of it is honest substitution.</p>
+      <ol class="caveats reveal">
+        <li><strong>The wordmark font is a substitution.</strong> The supplied "NABIL PERVEZ" face is a high-contrast display serif not on Google Fonts. Prata is the closest available match. The <code>type</code> variant's N→Z justification is measurement-driven, so it survives dropping in the real face — only the letterforms change.</li>
+        <li><strong>No font binaries were provided.</strong> Fonts load from the Google Fonts CDN, matching the résumé source. Drop <code>.woff2</code> files into <code>assets/fonts/</code> and rewrite one file to make the system self-contained and offline-capable.</li>
+        <li><strong>The live site's layout was not read from source.</strong> nabilpervezconsulting.com is client-rendered and served no HTML. The consulting-site kit reproduces the supplied copy inside the résumé's proven visual language; section order and hero treatment are inferred.</li>
+        <li><strong>No client logo art.</strong> The trusted-by wall sets client names in muted uppercase Cormorant. Third-party marks must not be reconstructed, so this stays type until licensed art exists.</li>
+        <li><strong>No semantic status colours.</strong> Nothing in the sources needed success / warning / error. If a product surface requires them, they need to be designed, not guessed.</li>
+        <li><strong>One photograph.</strong> The portrait is the only image in the system. Everything documented under Imagery is generalised from that single frame.</li>
+      </ol>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <img src="assets/wordmark-nabil-pervez-gold.png" alt="Nabil Pervez">
+    <div class="col">
+      <span>Dallas–Fort Worth, TX</span>
+      <a href="mailto:nabilpervezgg@gmail.com">nabilpervezgg@gmail.com</a>
+      <span style="opacity:.6">The NPC Design System · © 2026 Nabil Pervez Consulting</span>
+    </div>
+  </div>
+</footer>
+
+<script src="https://unpkg.com/lucide@0.454.0/dist/umd/lucide.js"></script>
+<script>
+(function () {
+  /* Icons */
+  if (window.lucide) window.lucide.createIcons();
+
+  /* Theme toggle — dark is the default; not persisted, per the system's rule */
+  var root = document.documentElement;
+  var btn = document.getElementById('themeToggle');
+  function paint() { btn.textContent = root.getAttribute('data-theme') === 'dark' ? 'Light' : 'Dark'; }
+  btn.addEventListener('click', function () {
+    root.setAttribute('data-theme', root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+    paint();
+  });
+  paint();
+
+  /* Scroll reveal — fade up, IntersectionObserver, one-shot */
+  var revealables = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    var ro = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('in-view'); ro.unobserve(e.target); }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    revealables.forEach(function (el) { ro.observe(el); });
+  } else {
+    revealables.forEach(function (el) { el.classList.add('in-view'); });
+  }
+
+  /* Hover isolation — parent gets .is-hovered, hovered card gets .is-active */
+  document.querySelectorAll('.iso').forEach(function (list) {
+    var cards = Array.prototype.slice.call(list.querySelectorAll('.card'));
+    cards.forEach(function (card) {
+      card.addEventListener('mouseenter', function () {
+        list.classList.add('is-hovered');
+        cards.forEach(function (c) { c.classList.remove('is-active'); });
+        card.classList.add('is-active');
+      });
+      card.addEventListener('mouseleave', function () {
+        list.classList.remove('is-hovered');
+        card.classList.remove('is-active');
+      });
+    });
+  });
+
+  /* Nav active-section highlight */
+  var links = Array.prototype.slice.call(document.querySelectorAll('.nav-links a[href^="#"]'));
+  var map = {};
+  links.forEach(function (a) { var s = document.querySelector(a.getAttribute('href')); if (s) map[s.id] = a; });
+  if ('IntersectionObserver' in window) {
+    var so = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting && map[e.target.id]) {
+          links.forEach(function (l) { l.classList.remove('active'); });
+          map[e.target.id].classList.add('active');
+        }
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    Object.keys(map).forEach(function (id) { so.observe(document.getElementById(id)); });
+  }
+})();
+</script>
+</body>
+</html>

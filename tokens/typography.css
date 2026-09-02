@@ -1,0 +1,52 @@
+:root{
+  /* Families */
+  --font-wordmark:'Prata',"Cormorant Garamond",serif;   /* lockups only */
+  --font-serif:'Cormorant Garamond',Georgia,serif;      /* headings, titles */
+  --font-sans:'Outfit',system-ui,sans-serif;            /* body + UI */
+  --font-mono:'Outfit',ui-monospace,monospace;           /* IDs, codes */
+
+  /* Root scale — the resume sets html{font-size:15px}; rem values assume it */
+  --font-root:15px; /* @kind font */
+
+  /* Sizes (rem, against 15px root) */
+  --fs-micro:.64rem; /* @kind font */   /* stat labels, cert ids */
+  --fs-2xs:.65rem; /* @kind font */     /* skill category eyebrow */
+  --fs-xs:.70rem; /* @kind font */      /* tags */
+  --fs-sm:.72rem; /* @kind font */      /* nav links, eyebrows, footer */
+  --fs-base:.78rem; /* @kind font */    /* sidebar body, small copy */
+  --fs-md:.82rem; /* @kind font */      /* body copy, list items */
+  --fs-lg:.90rem; /* @kind font */      /* lead paragraph */
+  --fs-title:1.05rem; /* @kind font */  /* section head / card title */
+  --fs-title-lg:1.35rem; /* @kind font *//* nav wordmark */
+  --fs-display:clamp(3rem,7vw,5.2rem); /* @kind font */
+  --fs-display-sm:clamp(2.4rem,10vw,3.4rem); /* @kind font */
+
+  /* Weights */
+  --fw-light:300; /* @kind font */
+  --fw-regular:400; /* @kind font */
+  --fw-medium:500; /* @kind font */
+  --fw-semibold:600; /* @kind font */
+  --fw-bold:700; /* @kind font */
+
+  /* Line heights */
+  --lh-display:1.04; /* @kind font */
+  --lh-tight:1.25; /* @kind font */
+  --lh-snug:1.4; /* @kind font */
+  --lh-body:1.6; /* @kind font */
+  --lh-relaxed:1.75; /* @kind font */
+
+  /* Tracking — the brand leans hard on wide uppercase tracking */
+  --ls-display:-1px; /* @kind font */
+  --ls-tight:.3px; /* @kind font */
+  --ls-wide:1.2px; /* @kind font */
+  --ls-wider:1.4px; /* @kind font */
+  --ls-widest:2.5px; /* @kind font */
+
+  /* Ready-made roles */
+  --text-display:var(--fw-light) var(--fs-display)/var(--lh-display) var(--font-serif); /* @kind font */
+  --text-section:var(--fw-semibold) var(--fs-title)/1.2 var(--font-serif); /* @kind font */
+  --text-card-title:var(--fw-semibold) 1.08rem/var(--lh-tight) var(--font-serif); /* @kind font */
+  --text-body:var(--fw-regular) var(--fs-md)/var(--lh-body) var(--font-sans); /* @kind font */
+  --text-lead:var(--fw-light) var(--fs-lg)/var(--lh-relaxed) var(--font-sans); /* @kind font */
+  --text-eyebrow:var(--fw-medium) var(--fs-sm)/1 var(--font-sans); /* @kind font */
+}

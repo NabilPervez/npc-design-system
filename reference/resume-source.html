@@ -1,0 +1,1441 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nabil Pervez — Award-Winning Product Manager</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+/* ═══════════════════════════════════════════
+   RESET & CUSTOM PROPERTIES
+═══════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:         #07101F;
+  --bg-card:    #0C1829;
+  --bg-glass:   rgba(7, 16, 31, 0.78);
+  --text:       #E2EAF4;
+  --muted:      #5E718F;
+  --border:     rgba(220, 180, 80, 0.2);
+  --gold:       #DDB84A;
+  --gold-bright:#F0CC6A;
+  --gold-dim:   rgba(220, 180, 80, 0.13);
+  --grad:       linear-gradient(120deg, #F0CC6A 0%, #C88B20 50%, #E8B840 100%);
+  --grad-text:  linear-gradient(120deg, #F5D97A 0%, #DDB84A 40%, #C88B20 75%, #E8B840 100%);
+  --shine:      linear-gradient(90deg, transparent 0%, rgba(255, 220, 100, 0.22) 50%, transparent 100%);
+  --radius:     10px;
+  --nav-h:      62px;
+  --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-theme="light"] {
+  --bg:         #EEF2FA;
+  --bg-card:    #F8FBFF;
+  --bg-glass:   rgba(238, 242, 250, 0.84);
+  --text:       #0D1829;
+  --muted:      #6A7A96;
+  --border:     rgba(160, 110, 10, 0.22);
+  --gold:       #9A6A10;
+  --gold-bright:#B07C18;
+  --gold-dim:   rgba(160, 110, 10, 0.09);
+  --grad:       linear-gradient(120deg, #C89020 0%, #8A5C08 50%, #B07820 100%);
+  --grad-text:  linear-gradient(120deg, #C89020 0%, #8A5C08 60%, #B07820 100%);
+}
+
+html { scroll-behavior: smooth; font-size: 15px; }
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+  transition: background var(--transition), color var(--transition);
+}
+
+/* Noise texture overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  background-size: 180px;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.55;
+}
+
+/* ═══════════════════════════════════════════
+   NAVIGATION
+═══════════════════════════════════════════ */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: var(--nav-h);
+  background: var(--bg-glass);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 36px;
+  z-index: 100;
+  transition: background var(--transition);
+}
+
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.35rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: var(--gold);
+  opacity: 0;
+  animation: fadeDown 0.6s 0.2s ease forwards;
+  white-space: nowrap;
+}
+
+.nav-links {
+  display: flex;
+  gap: 6px;
+  list-style: none;
+  opacity: 0;
+  animation: fadeDown 0.6s 0.35s ease forwards;
+}
+
+.nav-links a {
+  font-size: 0.72rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+  color: var(--muted);
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  transition: color 0.2s, background 0.2s;
+}
+.nav-links a:hover { color: var(--text); background: var(--gold-dim); }
+
+/* Mobile Nav Contact Icons */
+.nav-mobile-contact {
+  display: none;
+  gap: 16px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.nav-mobile-contact a {
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  transition: color 0.2s ease;
+}
+.nav-mobile-contact a:hover {
+  color: var(--gold-bright);
+}
+.nav-mobile-contact svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ═══════════════════════════════════════════
+   FAB
+═══════════════════════════════════════════ */
+.fab {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 200;
+  opacity: 0;
+  animation: fadeUp 0.5s 1.2s ease forwards;
+}
+
+.fab-btn {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--bg-glass);
+  backdrop-filter: blur(14px);
+  color: var(--gold);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.05rem;
+  transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.35);
+}
+a.fab-btn {
+  text-decoration: none;
+}
+.fab-btn:hover {
+  transform: scale(1.12);
+  background: var(--gold);
+  color: var(--bg);
+  box-shadow: 0 6px 32px rgba(200, 168, 76, 0.35);
+}
+
+/* ═══════════════════════════════════════════
+   PAGE WRAPPER
+═══════════════════════════════════════════ */
+.page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: calc(var(--nav-h) + 52px) 40px 80px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ═══════════════════════════════════════════
+   HERO
+═══════════════════════════════════════════ */
+.hero {
+  margin-bottom: 72px;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.4s ease forwards;
+}
+
+.hero-inner {
+  display: grid;
+  grid-template-columns: 1fr 260px;
+  column-gap: 40px;
+  row-gap: 0;
+  align-items: start;
+}
+
+.hero-titles {
+  grid-column: 1;
+  grid-row: 1;
+  align-self: end;
+  margin-bottom: 24px;
+}
+
+.hero-contact {
+  grid-column: 1;
+  grid-row: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 28px;
+}
+
+.hero-summary {
+  grid-column: 1;
+  grid-row: 3;
+  align-self: start;
+  max-width: 720px;
+  font-size: 0.9rem;
+  color: var(--muted);
+  line-height: 1.75;
+  border-left: 2px solid var(--gold);
+  padding-left: 20px;
+  font-weight: 300;
+}
+
+.hero-image {
+  grid-column: 2;
+  grid-row: 1 / 4;
+  align-self: center;
+  width: 260px;
+  height: 340px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.25);
+  background: var(--bg-card);
+}
+
+.hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.hero-eyebrow {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.hero-eyebrow::before {
+  content: '';
+  display: block;
+  width: 32px;
+  height: 1px;
+  background: var(--gold);
+}
+
+.hero h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(3rem, 7vw, 5.2rem);
+  font-weight: 300;
+  line-height: 1.04;
+  letter-spacing: -1px;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+
+.hero h1 em, .stat-num {
+  font-style: italic;
+  background: var(--grad-text);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-size: 200% auto;
+  animation: shimmerText 4s linear infinite;
+}
+
+.stat-num {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+
+.hero-tagline {
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0;
+}
+
+.hero-contact-physical, .hero-contact-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 20px;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+.hero-contact a {
+  color: var(--gold-bright);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.hero-contact a:hover { color: var(--text); }
+
+.hero-summary strong { color: var(--text); font-weight: 500; }
+
+/* ═══════════════════════════════════════════
+   TWO-COLUMN LAYOUT
+═══════════════════════════════════════════ */
+.content-grid {
+  display: grid;
+  grid-template-columns: 1fr 260px;
+  gap: 0 52px;
+  align-items: start;
+}
+
+/* ═══════════════════════════════════════════
+   SECTION HEADERS
+═══════════════════════════════════════════ */
+.section-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 28px;
+}
+.section-head h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  color: var(--gold);
+  white-space: nowrap;
+}
+.section-head::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* ═══════════════════════════════════════════
+   EXPERIENCE CARDS + HOVER ISOLATION
+═══════════════════════════════════════════ */
+.exp-section { margin-bottom: 56px; }
+
+.experience-list { position: relative; }
+
+/* Hover isolation: parent gets .is-hovered when any child is hovered */
+.experience-list.is-hovered .job-card:not(.job-active) {
+  opacity: 0.28;
+}
+
+.job-card {
+  padding: 22px 24px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-card);
+  margin-bottom: 14px;
+  cursor: default;
+  position: relative;
+  overflow: hidden;
+  transition: opacity var(--transition), transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+/* Shine sweep on hover */
+.job-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 55%;
+  height: 100%;
+  background: var(--shine);
+  transform: skewX(-12deg);
+  transition: left 0.55s ease;
+  pointer-events: none;
+}
+.job-card.job-active::after { left: 160%; }
+
+.job-card.job-active {
+  transform: translateY(-2px) scale(1.012);
+  border-color: rgba(200, 168, 76, 0.38);
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.38), 0 0 0 1px rgba(200, 168, 76, 0.12);
+}
+
+.job-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.job-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.08rem;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.25;
+}
+
+.highlight-sme {
+  transition: color 0.2s ease;
+}
+.job-card.job-active .highlight-sme {
+  color: var(--gold-bright);
+}
+
+.job-company {
+  font-size: 0.78rem;
+  color: var(--gold);
+  font-weight: 400;
+  margin-top: 3px;
+  letter-spacing: 0.3px;
+}
+
+.job-date {
+  font-size: 0.73rem;
+  color: var(--muted);
+  font-weight: 300;
+  white-space: nowrap;
+  letter-spacing: 0.5px;
+  flex-shrink: 0;
+  padding: 3px 9px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  margin-top: 2px;
+}
+
+.job-card ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.job-card ul li {
+  font-size: 0.82rem;
+  color: var(--muted);
+  padding-left: 16px;
+  position: relative;
+  line-height: 1.6;
+  transition: color 0.2s;
+}
+.job-card.job-active ul li { color: var(--text); }
+
+.job-card ul li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+  font-size: 0.65rem;
+  top: 4px;
+}
+.job-card ul li strong {
+  color: var(--text);
+  font-weight: 500;
+}
+.job-card.job-active ul li strong { color: var(--gold-bright); }
+
+/* Scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ═══════════════════════════════════════════
+   AI PROJECTS
+═══════════════════════════════════════════ */
+.projects-section { margin-bottom: 56px; }
+
+.project-card {
+  padding: 20px 22px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-card);
+  margin-bottom: 12px;
+  transition: border-color 0.25s, transform 0.25s;
+}
+.project-card:hover {
+  border-color: rgba(220, 180, 80, 0.4);
+  transform: translateY(-2px);
+}
+
+.project-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 7px;
+}
+.project-desc {
+  font-size: 0.8rem;
+  color: var(--muted);
+  line-height: 1.65;
+}
+.project-desc a {
+  color: var(--gold-bright);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(220, 180, 80, 0.35);
+  transition: color 0.2s, border-color 0.2s;
+}
+.project-desc a:hover { color: var(--text); border-color: var(--gold); }
+
+.project-link-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 12px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: #07101F;
+  background: var(--grad);
+  padding: 7px 16px;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: opacity 0.2s, transform 0.2s;
+}
+.project-link-btn:hover {
+  opacity: 0.88;
+  transform: translateY(-1px);
+}
+.project-link-btn svg { width: 13px; height: 13px; fill: currentColor; }
+
+/* ═══════════════════════════════════════════
+   SIDEBAR
+═══════════════════════════════════════════ */
+.sidebar { position: sticky; top: calc(var(--nav-h) + 28px); }
+
+.sidebar-section { margin-bottom: 36px; }
+
+.cert-item {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+}
+.cert-item:last-child { border-bottom: none; }
+
+.cert-name {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text);
+  line-height: 1.35;
+  margin-bottom: 2px;
+}
+.cert-sub {
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+.cert-id {
+  font-size: 0.65rem;
+  color: var(--muted);
+  opacity: 0.7;
+  letter-spacing: 0.5px;
+  font-family: 'Outfit', monospace;
+}
+
+/* Tags */
+.tag-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.tag {
+  font-size: 0.7rem;
+  padding: 4px 10px;
+  border-radius: 5px;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  background: var(--bg-card);
+  transition: border-color 0.2s, color 0.2s;
+  line-height: 1.4;
+}
+.tag:hover { border-color: var(--gold); color: var(--gold); }
+.tag.primary {
+  background: var(--gold-dim);
+  border-color: rgba(200, 168, 76, 0.3);
+  color: var(--gold);
+  font-weight: 500;
+}
+
+/* Skills categories */
+.skill-cat {
+  font-size: 0.65rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--gold);
+  margin-bottom: 6px;
+  margin-top: 14px;
+}
+.skill-cat:first-child { margin-top: 0; }
+
+.skill-list {
+  font-size: 0.78rem;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+/* Education / Awards items */
+.edu-item, .award-item {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+}
+.edu-item:last-child, .award-item:last-child { border-bottom: none; }
+
+.edu-name {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 2px;
+}
+.edu-sub { font-size: 0.72rem; color: var(--muted); }
+
+.award-name {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 2px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.award-name::before {
+  content: '★';
+  font-size: 0.65rem;
+  color: var(--gold);
+}
+.award-sub { font-size: 0.72rem; color: var(--muted); }
+
+/* Stat chips */
+.stats-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 36px;
+}
+.stat-chip {
+  padding: 16px 16px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-card);
+  text-align: center;
+}
+
+.stat-label {
+  font-size: 0.64rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 400;
+}
+
+/* ═══════════════════════════════════════════
+   DIVIDER LINE
+═══════════════════════════════════════════ */
+.divider {
+  height: 1px;
+  background: var(--border);
+  margin: 56px 0;
+}
+
+/* ═══════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════ */
+footer {
+  text-align: center;
+  font-size: 0.72rem;
+  color: var(--muted);
+  padding: 40px 0 20px;
+  opacity: 0.6;
+}
+
+/* ═══════════════════════════════════════════
+   ANIMATIONS
+═══════════════════════════════════════════ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes shimmerText {
+  0%   { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+@keyframes pulseGold {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.55; }
+}
+
+/* ═══════════════════════════════════════════
+   REDUCED MOTION
+═══════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .reveal { opacity: 1; transform: none; }
+}
+
+/* MOBILE SPECIFIC REORDERING CLASSES */
+.mobile-stats { display: none; }
+.desktop-stats { display: grid; }
+
+.mobile-skills { display: none; }
+.desktop-skills { display: block; }
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════ */
+@media (max-width: 860px) {
+  .hero-inner {
+    grid-template-columns: 1fr;
+    column-gap: 0;
+  }
+  .hero-titles {
+    grid-column: 1;
+    grid-row: 1;
+    margin-bottom: 24px;
+  }
+  .hero-image {
+    display: none; /* Hide on mobile per request */
+  }
+  .hero-contact {
+    grid-column: 1;
+    grid-row: 2;
+    margin-bottom: 24px;
+  }
+  .hero-summary {
+    grid-column: 1;
+    grid-row: 3;
+  }
+
+  .content-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  /* Layout re-ordering for mobile */
+  .mobile-stats { 
+    display: grid; 
+    grid-template-columns: repeat(4, 1fr);
+    margin-bottom: 40px;
+  }
+  .desktop-stats { display: none; }
+  
+  .mobile-skills { 
+    display: block; 
+    margin-bottom: 40px;
+    border-top: 1px solid var(--border);
+    padding-top: 40px;
+  }
+  .desktop-skills { display: none; }
+
+  .sidebar {
+    position: static;
+    border-top: 1px solid var(--border);
+    padding-top: 40px;
+    margin-top: 20px;
+  }
+  .page { padding: calc(var(--nav-h) + 32px) 22px 60px; }
+  nav { padding: 0 20px; }
+  .nav-links { display: none; }
+  
+  /* Show Mobile Contact Info on Scroll */
+  nav.is-scrolled .nav-mobile-contact { 
+    display: flex; 
+    opacity: 1;
+    animation: fadeDown 0.3s ease forwards;
+  }
+
+  .hero h1 { font-size: clamp(2.4rem, 10vw, 3.4rem); }
+}
+
+@media (max-width: 520px) {
+  .mobile-stats { grid-template-columns: 1fr 1fr; }
+  .fab { bottom: 20px; right: 20px; }
+}
+
+/* ═══════════════════════════════════════════
+   PRINT STYLES
+═══════════════════════════════════════════ */
+@media print {
+  nav, .fab, body::before { display: none !important; }
+  body { background: white !important; color: black !important; }
+  .page { padding: 0; max-width: 100%; }
+  .content-grid { grid-template-columns: 1fr 220px; }
+  .hero-inner { grid-template-columns: 1fr 140px; gap: 20px; }
+  .hero-image { border: 1px solid #ccc !important; box-shadow: none !important; width: 140px; height: 180px; grid-column: 2; grid-row: 1; display: block; } /* Show in print */
+  .job-card, .project-card { border: 1px solid #ccc !important; background: white !important; }
+  .reveal { opacity: 1 !important; transform: none !important; }
+  .sidebar { position: static; }
+  .project-link-btn { display: none !important; }
+  .hero h1 { -webkit-text-fill-color: black !important; background: none !important; color: black !important; }
+  .hero h1 em, .stat-num { -webkit-text-fill-color: black !important; background: none !important; color: black !important; }
+  .mobile-stats, .mobile-skills { display: none !important; }
+  .desktop-stats { display: grid !important; }
+  .desktop-skills { display: block !important; }
+}
+
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-logo">Nabil Pervez</span>
+  
+  <div class="nav-mobile-contact">
+    <a href="tel:2146054762" aria-label="Phone Number">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+    </a>
+    <a href="mailto:nabilpervezgg@gmail.com" aria-label="Email">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+    </a>
+    <a href="https://linkedin.com/in/perveznabil" target="_blank" rel="noopener" aria-label="LinkedIn">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+    </a>
+  </div>
+
+  <ul class="nav-links">
+    <li><a href="#hero">Summary</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">AI Web Apps</a></li>
+    <li><a href="#martech">MarTech</a></li>
+    <li><a href="#certifications">Certs</a></li>
+    <li><a href="#awards">Awards</a></li>
+    <li><a href="#education">Education</a></li>
+  </ul>
+</nav>
+
+<div class="fab">
+  <button class="fab-btn" id="theme-toggle" title="Toggle light/dark mode" aria-label="Toggle theme">
+    <svg id="icon-moon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    <svg id="icon-sun" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+  </button>
+  <a href="https://docs.google.com/document/d/158tE1XaDNeGnq7MymFMMtIVsSnGvjkOrPB_3hpe1DCY/edit?tab=t.0" target="_blank" rel="noopener" class="fab-btn" title="View / Download Resume" aria-label="Download Resume">
+    <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="8 17 12 21 16 17"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.88 18.09A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.29"/></svg>
+  </a>
+</div>
+
+<div class="page">
+
+  <section class="hero" id="hero">
+    <div class="hero-inner">
+      <div class="hero-titles">
+        <div class="hero-eyebrow">Award-Winning Product Manager</div>
+        <h1><em class="hero-em">Nabil</em> Pervez</h1>
+        <p class="hero-tagline">MarTech &amp; AI Implementation · Certified ScrumMaster</p>
+      </div>
+      
+      <div class="hero-contact">
+        <div class="hero-contact-physical">
+          <span>(214) 605-4762</span>
+          <span>Dallas–Fort Worth, TX</span>
+        </div>
+        <div class="hero-contact-links">
+          <a href="mailto:nabilpervezgg@gmail.com">nabilpervezgg@gmail.com</a>
+          <a href="https://linkedin.com/in/perveznabil" target="_blank" rel="noopener">LinkedIn ↗</a>
+          <a href="https://github.com/nabilpervez" target="_blank" rel="noopener">GitHub ↗</a>
+          <a href="https://www.behance.net/aoecreative" target="_blank" rel="noopener">Behance ↗</a>
+          <a href="https://nabilpervez.com/products" target="_blank" rel="noopener">Portfolio ↗</a>
+        </div>
+      </div>
+      
+      <p class="hero-summary">
+        Award-winning product manager with <strong>10+ years experience</strong> driving enterprise MarTech implementations across CMS, DAM, and AI-powered content platforms. Currently serving as the <strong>AI Subject Matter Expert &amp; Content Producer at T-Mobile</strong>, coaching cross-functional teams on platform adoption and directly influencing Gradial's product roadmap. Hands-on expertise in <strong>Adobe Experience Manager (AEM)</strong> and equipped with practical knowledge through the AEM Foundations certification. Previous clients include <strong>Riot Games, Coca-Cola, LEGO, and Red Bull</strong>. Personal portfolio of <strong>12+ AI-Assisted Code Web Applications</strong>.
+      </p>
+      
+      <div class="hero-image reveal">
+        <img src="https://nabilpervez.com/images/nabil-headshot.jpg" alt="Nabil Pervez Headshot">
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <div class="stats-row reveal mobile-stats">
+      <div class="stat-chip">
+        <span class="stat-num">10+</span>
+        <span class="stat-label">Years XP</span>
+      </div>
+      <div class="stat-chip">
+        <span class="stat-num">12+</span>
+        <span class="stat-label">AI Apps</span>
+      </div>
+      <div class="stat-chip">
+        <span class="stat-num">$5M+</span>
+        <span class="stat-label">Portfolio Managed</span>
+      </div>
+      <div class="stat-chip">
+        <span class="stat-num">90%</span>
+        <span class="stat-label">Client Referral Rate</span>
+      </div>
+    </div>
+
+    <div class="sidebar-section reveal mobile-skills">
+      <div class="section-head"><h2>Core Skills</h2></div>
+
+      <div class="skill-cat">Delivery &amp; Product</div>
+      <div class="skill-list">Forward Deployment · Scoping &amp; Discovery · Go-Live Ownership · UAT/QA · Roadmap Influence · Time-to-Value Optimization · Agile / Scrum / Waterfall · Project Management · Project Plans</div>
+
+      <div class="skill-cat">AI &amp; Automation</div>
+      <div class="skill-list">Prompt Engineering · AI Assisted Coding · RAG Architecture · AI Workflow Design · LLM Implementation</div>
+
+      <div class="skill-cat">Stakeholder &amp; Ops</div>
+      <div class="skill-list">Executive Communication · Cross-Functional Alignment · Enablement &amp; Training · Requirements Elicitation · Risk Management · Organization Skills · Analytical Skills · Business Development · Strategic Thinking · Cross-functional Collaborations</div>
+
+      <div class="skill-cat">Strategy &amp; Marketing</div>
+      <div class="skill-list">Brand Management · Digital Strategy · Marketing Strategy · Influencer Marketing · Community Engagement · Local Marketing · Brand Marketing · Go-to-Market Strategy</div>
+
+      <div class="skill-cat">Technical</div>
+      <div class="skill-list">Python · PowerShell · React · Azure AD · Active Directory · Endpoint Security · Incident Response · Virtualization · Jira · Confluence · Microsoft Intune</div>
+    </div>
+
+    <div class="content-grid">
+      <div class="main-content">
+        <section class="exp-section" id="experience">
+          <div class="section-head"><h2>Experience</h2></div>
+          <div class="experience-list" id="exp-list">
+
+            <div class="job-card reveal">
+              <div class="job-header">
+                <div>
+                  <div class="job-title"><span class="highlight-sme">AI Implementation SME</span> &amp; Content Producer</div>
+                  <div class="job-company">T-Mobile · Frisco, TX</div>
+                </div>
+                <div class="job-date">Aug 2025 – Present</div>
+              </div>
+              <ul>
+                <li>Serve as enterprise SME for Gradial across T-Mobile's digital content org, coaching multiple lines of business on platform adoption, rule creation, and workflow integration — <strong>directly accelerating time-to-value</strong> for each LOB.</li>
+                <li>Lead implementation for the Zipline LOB: defining integration scope, configuring Gradial rules, and aligning workflows to business goals within AEM environments.</li>
+                <li><strong>Architected and deployed 12+ Gradial rules</strong> of varying complexity, streamlining content ingestion from Jira and reducing manual production effort across teams.</li>
+                <li><strong>Influenced Gradial's product roadmap</strong> as an embedded enterprise power user: proposed a real-time ticket feedback mechanism post-Jira ingestion and a Gradial chatbot for ticket description refinement.</li>
+                <li>Managed content publishing and QA across T-Mobile web platforms in <strong>Adobe Experience Manager (AEM)</strong>, ensuring brand integrity and cross-functional alignment with Legal, Analytics, SEO, and Product.</li>
+                <li>Utilized AI to build internal software solutions that increased team velocity; coached teammates on AI-first workflows to reduce friction and accelerate delivery.</li>
+              </ul>
+            </div>
+
+            <div class="job-card reveal">
+              <div class="job-header">
+                <div>
+                  <div class="job-title">Founder &amp; Principal Consultant</div>
+                  <div class="job-company">Nabil Pervez Consulting (NPC) · Dallas, TX</div>
+                </div>
+                <div class="job-date">Jan 2024 – Present</div>
+              </div>
+              <ul>
+                <li>Provided fractional executive consulting on AI strategy, MarTech stack selection, branding, and digital operations for agencies and businesses.</li>
+                <li><strong>Leveraged AI-assisted coding to dramatically compress branding timelines</strong> — using LLM-assisted research, rapid prototyping, and automated asset generation to deliver brand identities at a fraction of traditional agency cost.</li>
+                <li>Scoped and designed system integrations in complex marketing environments; defined success criteria, validated implementations, and delivered phased activation roadmaps aligned to client KPIs.</li>
+                <li>Conducted business process assessments, identified MarTech stack gaps, and produced stakeholder-facing roadmaps with clear ROI framing for executive audiences.</li>
+              </ul>
+            </div>
+
+            <div class="job-card reveal">
+              <div class="job-header">
+                <div>
+                  <div class="job-title"><span class="highlight-sme">AI Implementation SME</span> &amp; Information Technology Specialist</div>
+                  <div class="job-company">Prospera Financial Services, Inc. · Dallas, TX</div>
+                </div>
+                <div class="job-date">Oct 2024 – Aug 2025</div>
+              </div>
+              <ul>
+                <li><strong>Implemented a RAG AI system using Microsoft Copilot</strong>, enabling AI-assisted information retrieval across business-critical knowledge bases and reducing research overhead for internal teams.</li>
+                <li>Led cross-functional IT initiatives covering systems, network security, and AI enhancements; administered Azure AD, Fortinet/Meraki firewall systems, and Entra automation — <strong>reducing security incidents by 15%</strong>.</li>
+                <li>Automated new PC builds using a combination of PowerShell, Microsoft Autopilot, and Microsoft Intune — <strong>reducing new PC build times by 90%</strong> via full automation. Leveraged AI-assisted coding to architect and generate the foundational PowerShell scripts.</li>
+                <li>Drove ITSM improvements via ITIL practices, achieving <strong>90% first-contact resolution</strong>; utilized PowerShell and Python to support scalable, automated infrastructure.</li>
+              </ul>
+            </div>
+
+            <div class="job-card reveal">
+              <div class="job-header">
+                <div>
+                  <div class="job-title">Co-Founder, CTO &amp; Senior Product Manager</div>
+                  <div class="job-company">AOE Creative · Award-Winning Digital Agency · Dallas, TX</div>
+                </div>
+                <div class="job-date">Nov 2018 – Feb 2024</div>
+              </div>
+              <ul>
+                <li>Co-founded and scaled a multi-million dollar digital agency with enterprise clients including <strong>LEGO, Red Bull, Coca-Cola, Riot Games, and Activision Blizzard</strong>; managed a <strong>$5M+ project portfolio</strong>.</li>
+                <li>Directed end-to-end product and implementation lifecycle for SaaS, web, AR/VR, and campaign products — from scoping and roadmap definition through go-live, QA, UAT, and client adoption.</li>
+                <li>Led cross-functional teams of up to 30 using Agile and Waterfall; achieved <strong>95% milestone adherence</strong> across concurrent project frameworks via Jira and Smartsheet.</li>
+                <li>Drove measurable client outcomes: <strong>30% engagement lift for Riot Games</strong>; 2.2M+ campaign reach for Coca-Cola at half industry-standard CPM.</li>
+                <li>Built executive-level client relationships; achieved a <strong>90% client referral rate</strong> and reduced churn by 30% through proactive delivery management.</li>
+                <li>Delivered award-winning campaign for Houston Outlaws / Infinite Esports generating <strong>10M+ impressions</strong>; finalist for Esports Organization of the Year.</li>
+              </ul>
+            </div>
+
+            <div class="job-card reveal">
+              <div class="job-header">
+                <div>
+                  <div class="job-title">Marketing Project Manager</div>
+                  <div class="job-company">Infinite Esports &amp; Entertainment · Dallas, TX</div>
+                </div>
+                <div class="job-date">Oct 2017 – Oct 2018</div>
+              </div>
+              <ul>
+                <li>Directed award-winning brand campaign generating <strong>10M+ impressions</strong> and events with 10K+ attendees each; managed cross-functional team of marketers, designers, videographers, and talent via Agile.</li>
+              </ul>
+            </div>
+
+            <div class="job-card reveal">
+              <div class="job-header">
+                <div>
+                  <div class="job-title">Marketing Project Manager</div>
+                  <div class="job-company">PVP Live · Frisco, TX</div>
+                </div>
+                <div class="job-date">Jun 2016 – Sep 2017</div>
+              </div>
+              <ul>
+                <li>Scaled platform to <strong>3M+ monthly active users</strong> through influencer strategy and data-driven content marketing; built 100K+ engaged community across social platforms.</li>
+              </ul>
+            </div>
+
+            <div class="job-card reveal">
+              <div class="job-header">
+                <div>
+                  <div class="job-title">Technical Support Engineer</div>
+                  <div class="job-company">MutualMind (acquired by Shapiro+Raj)</div>
+                </div>
+                <div class="job-date">2014 – 2016</div>
+              </div>
+              <ul>
+                <li>Provided expert support across multiple operating systems, including Windows, macOS, and Linux, ensuring comprehensive and tailored support for a diverse client base while leading the ITSM team.</li>
+                <li>Resolved technical issues promptly, achieving a <strong>95% first-contact resolution rate</strong> and boosting customer satisfaction scores by <strong>20%</strong>.</li>
+                <li>Conducted training sessions for clients on the effective use of the platform, increasing their self-sufficiency and reducing support requests by <strong>25%</strong>.</li>
+                <li>Achieved <strong>99% SLA compliance</strong> by streamlining support processes and utilizing real-time analytics to monitor performance.</li>
+                <li>Increased customer retention rate by <strong>20%</strong> by providing high-quality, personalized support.</li>
+                <li>Saved the company <strong>$50K annually</strong> by optimizing support workflows and vendor contracts for support tools and services.</li>
+              </ul>
+            </div>
+
+            <div class="job-card reveal">
+              <div class="job-header">
+                <div>
+                  <div class="job-title">Functional Analyst</div>
+                  <div class="job-company">T-Mobile</div>
+                </div>
+                <div class="job-date">2012 – 2014</div>
+              </div>
+              <ul>
+                <li>Led the ITSM team, swiftly addressing threats to minimize operational impact.</li>
+                <li>Achieved <strong>98% SLA compliance</strong> by streamlining support processes and utilizing real-time analytics to monitor performance.</li>
+                <li>Improved first call resolution rate to <strong>90%</strong> and reduced average response time by <strong>35%</strong> through process optimization and advanced training programs.</li>
+                <li>Decreased average ticket resolution time from 24 hours to 8 hours, resulting in a <strong>50% increase</strong> in customer satisfaction scores.</li>
+                <li>Developed and delivered training programs that improved support staff efficiency by <strong>25%</strong>, reducing onboarding time for new hires by <strong>20%</strong>.</li>
+                <li>Created and maintained technical documentation for common support issues, streamlining troubleshooting processes and reducing average resolution time by <strong>25%</strong>.</li>
+                <li><strong>Promoted:</strong> Tier 1 &gt; Tier 2 &gt; Tier 3 &gt; Trainer &gt; Functional Analyst.</li>
+              </ul>
+            </div>
+
+            <div class="job-card reveal">
+              <div class="job-header">
+                <div>
+                  <div class="job-title">Service Desk Analyst</div>
+                  <div class="job-company">Fujitsu</div>
+                </div>
+                <div class="job-date">2011 – 2012</div>
+              </div>
+              <ul>
+                <li>Administered user accounts in Active Directory, ensuring accurate and up-to-date access permissions, which improved user access efficiency and reduced support ticket volume by <strong>20%</strong>.</li>
+                <li>Collaborated with the incident response team to promptly address cybersecurity threats, minimizing operational disruptions and enhancing overall security posture.</li>
+                <li>Managed endpoint security, including firewall maintenance, to safeguard the organization's network against unauthorized access and potential breaches, resulting in a <strong>15% reduction</strong> in security incidents.</li>
+                <li>Provided timely and effective support to users, achieving a <strong>90% first-contact resolution rate</strong> and enhancing overall user satisfaction.</li>
+                <li>Created and maintained technical documentation for common support issues, streamlining troubleshooting processes and reducing average resolution time by <strong>25%</strong>.</li>
+              </ul>
+            </div>
+
+          </div>
+        </section>
+
+        <section class="projects-section reveal" id="projects">
+          <div class="section-head"><h2>AI Builds &amp; Projects</h2></div>
+
+          <div class="project-card reveal">
+            <div class="project-title">Product Portfolio — 12+ AI-Assisted Code Web Applications</div>
+            <p class="project-desc">
+              Full suite of products built using AI-assisted development, including productivity tools, Islamic heritage apps, and interactive experiences. Hosted across ~100 GitHub repositories.
+            </p>
+            <a class="project-link-btn" href="https://nabilpervez.com/products" target="_blank" rel="noopener">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3"/></svg>
+              View Live Portfolio
+            </a>
+          </div>
+
+          <div class="project-card reveal">
+            <div class="project-title">Serenity</div>
+            <p class="project-desc">
+              A comprehensive mental health toolkit featuring anxiety management strategies, guided box breathing exercises, and mood-tracking journaling to help users self-regulate and identify actionable mental health solutions.
+            </p>
+            <a class="project-link-btn" href="https://serenity-daily.netlify.app/" target="_blank" rel="noopener">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3"/></svg>
+              View Project
+            </a>
+          </div>
+
+          <div class="project-card reveal">
+            <div class="project-title">Baraka Boost</div>
+            <p class="project-desc">
+              An Islamic productivity application designed to foster focused, spiritually-aligned habit tracking and daily workflows.
+            </p>
+            <a class="project-link-btn" href="https://barakaboostmarketing.netlify.app/" target="_blank" rel="noopener">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3"/></svg>
+              View Project
+            </a>
+          </div>
+
+          <div class="project-card reveal">
+            <div class="project-title">KinKeep</div>
+            <p class="project-desc">
+              A privacy-focused Personal Relationship Manager (PRM) that transforms a static address book into an active relationship maintenance plan, built entirely as a local-first application.
+            </p>
+            <a class="project-link-btn" href="https://kinkeepmarketing.netlify.app/" target="_blank" rel="noopener">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3"/></svg>
+              View Project
+            </a>
+          </div>
+
+          <div class="project-card reveal">
+            <div class="project-title">Onyx Chat</div>
+            <p class="project-desc">
+              A privacy-first, purely peer-to-peer video calling platform requiring zero accounts and strictly enforcing no user tracking.
+            </p>
+            <a class="project-link-btn" href="https://onxychat.netlify.app/" target="_blank" rel="noopener">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3"/></svg>
+              View Project
+            </a>
+          </div>
+
+          <div class="project-card reveal">
+            <div class="project-title">Islamic Information RAG Agent</div>
+            <p class="project-desc">
+              Built a custom Retrieval-Augmented Generation AI agent using <strong style="color:var(--text)">n8n</strong>, enabling semantic search and Q&amp;A over Islamic knowledge bases — demonstrating applied LLM pipeline architecture and RAG system design.
+            </p>
+          </div>
+
+          <div class="project-card reveal">
+            <div class="project-title">Enterprise RAG Implementation — Prospera Financial</div>
+            <p class="project-desc">
+              Deployed Microsoft Copilot-powered RAG system for internal knowledge retrieval, streamlining information access for financial services workflows and dramatically reducing research overhead.
+            </p>
+          </div>
+
+        </section>
+      </div>
+
+      <aside class="sidebar">
+
+        <div class="stats-row reveal desktop-stats">
+          <div class="stat-chip">
+            <span class="stat-num">10+</span>
+            <span class="stat-label">Years XP</span>
+          </div>
+          <div class="stat-chip">
+            <span class="stat-num">12+</span>
+            <span class="stat-label">AI Apps</span>
+          </div>
+          <div class="stat-chip">
+            <span class="stat-num">$5M+</span>
+            <span class="stat-label">Portfolio Managed</span>
+          </div>
+          <div class="stat-chip">
+            <span class="stat-num">90%</span>
+            <span class="stat-label">Client Referral Rate</span>
+          </div>
+        </div>
+
+        <div class="sidebar-section reveal desktop-skills">
+          <div class="section-head"><h2>Core Skills</h2></div>
+
+          <div class="skill-cat">Delivery &amp; Product</div>
+          <div class="skill-list">Forward Deployment · Scoping &amp; Discovery · Go-Live Ownership · UAT/QA · Roadmap Influence · Time-to-Value Optimization · Agile / Scrum / Waterfall · Project Management · Project Plans</div>
+
+          <div class="skill-cat">AI &amp; Automation</div>
+          <div class="skill-list">Prompt Engineering · AI Assisted Coding · RAG Architecture · AI Workflow Design · LLM Implementation</div>
+
+          <div class="skill-cat">Stakeholder &amp; Ops</div>
+          <div class="skill-list">Executive Communication · Cross-Functional Alignment · Enablement &amp; Training · Requirements Elicitation · Risk Management · Organization Skills · Analytical Skills · Business Development · Strategic Thinking · Cross-functional Collaborations</div>
+
+          <div class="skill-cat">Strategy &amp; Marketing</div>
+          <div class="skill-list">Brand Management · Digital Strategy · Marketing Strategy · Influencer Marketing · Community Engagement · Local Marketing · Brand Marketing · Go-to-Market Strategy</div>
+
+          <div class="skill-cat">Technical</div>
+          <div class="skill-list">Python · PowerShell · React · Azure AD · Active Directory · Endpoint Security · Incident Response · Virtualization · Jira · Confluence · Microsoft Intune</div>
+        </div>
+
+        <div class="sidebar-section reveal" id="martech">
+          <div class="section-head"><h2>MarTech &amp; Platforms</h2></div>
+          <div class="tag-cloud" id="skills">
+            <span class="tag primary">Gradial</span>
+            <span class="tag primary">Adobe Experience Manager</span>
+            <span class="tag">AEM Assets (DAM)</span>
+            <span class="tag">WordPress</span>
+            <span class="tag">Adobe Target</span>
+            <span class="tag">Jira</span>
+            <span class="tag">Content Workflow Automation</span>
+            <span class="tag">n8n</span>
+            <span class="tag">Microsoft Copilot</span>
+            <span class="tag">Google Adwords</span>
+            <span class="tag">ChatGPT</span>
+            <span class="tag">Claude</span>
+            <span class="tag">Google Firebase Studio</span>
+            <span class="tag">Loveable</span>
+            <span class="tag">Netlify</span>
+            <span class="tag">Github</span>
+          </div>
+        </div>
+
+        <div class="sidebar-section reveal" id="certifications">
+          <div class="section-head"><h2>Certifications</h2></div>
+          
+          <div class="cert-item">
+            <div class="cert-name">Gradial Practitioner</div>
+            <div class="cert-sub">Gradial</div>
+          </div>
+          <div class="cert-item">
+            <div class="cert-name">Teaching the AI Fluency Framework</div>
+            <div class="cert-sub">Anthropic · Apr 2026</div>
+            <div class="cert-id">ID: ps32cr7cyspi</div>
+          </div>
+          <div class="cert-item">
+            <div class="cert-name">AI Fluency Framework &amp; Foundations</div>
+            <div class="cert-sub">Anthropic · Apr 2026</div>
+            <div class="cert-id">ID: 3j9fj4u42krz</div>
+          </div>
+          <div class="cert-item">
+            <div class="cert-name">Adobe Experience Manager Foundations</div>
+            <div class="cert-sub">Adobe</div>
+          </div>
+          <div class="cert-item">
+            <div class="cert-name">Adobe Target Foundations</div>
+            <div class="cert-sub">Adobe · Sep 2025</div>
+          </div>
+          <div class="cert-item">
+            <div class="cert-name">Scrum Master Certified (SMC)</div>
+            <div class="cert-sub">SCRUMstudy</div>
+          </div>
+          <div class="cert-item">
+            <div class="cert-name">Azure Fundamentals (AZ-900)</div>
+            <div class="cert-sub">Microsoft</div>
+          </div>
+          <div class="cert-item">
+            <div class="cert-name">PMP® Certification Training</div>
+            <div class="cert-sub">Completed coursework</div>
+          </div>
+        </div>
+
+        <div class="sidebar-section reveal" id="awards">
+          <div class="section-head"><h2>Awards</h2></div>
+          <div class="award-item">
+            <div class="award-name">Winner — Best Social Experience</div>
+            <div class="award-sub">Band Together · Houston Outlaws</div>
+          </div>
+          <div class="award-item">
+            <div class="award-name">Finalist — Esports Organization of the Year</div>
+            <div class="award-sub">Optic Gaming / Houston Outlaws</div>
+          </div>
+          <div class="award-item">
+            <div class="award-name">Finalist — Creative Agency of the Year (×2)</div>
+            <div class="award-sub">AOE Creative</div>
+          </div>
+        </div>
+
+        <div class="sidebar-section reveal" id="education">
+          <div class="section-head"><h2>Education</h2></div>
+          <div class="edu-item">
+            <div class="edu-name">Full Stack Web Development</div>
+            <div class="edu-sub">NuCamp Coding Bootcamp · 2022–2023<br>MongoDB, Express, React, React Native, Node.js, Postman</div>
+          </div>
+          <div class="edu-item">
+            <div class="edu-name">Computer Science</div>
+            <div class="edu-sub">University of Texas at Dallas · 2011–2013</div>
+          </div>
+          <div class="edu-item">
+            <div class="edu-name">A.S., Computer Science</div>
+            <div class="edu-sub">Collin County Community College · 2008–2011</div>
+          </div>
+        </div>
+
+      </aside>
+    </div>
+  </main>
+</div><script>
+/* ─────────────────────────────────────
+   THEME TOGGLE
+───────────────────────────────────── */
+const html = document.documentElement;
+const toggleBtn = document.getElementById('theme-toggle');
+const iconMoon = document.getElementById('icon-moon');
+const iconSun  = document.getElementById('icon-sun');
+
+function setTheme(theme) {
+  html.setAttribute('data-theme', theme);
+  localStorage.setItem('nabil-theme', theme);
+  if (theme === 'light') {
+    iconMoon.style.display = 'none';
+    iconSun.style.display  = 'block';
+  } else {
+    iconMoon.style.display = 'block';
+    iconSun.style.display  = 'none';
+  }
+}
+
+// Restore saved preference
+const saved = localStorage.getItem('nabil-theme');
+if (saved) setTheme(saved);
+
+toggleBtn.addEventListener('click', () => {
+  const curr = html.getAttribute('data-theme');
+  setTheme(curr === 'dark' ? 'light' : 'dark');
+});
+
+/* ─────────────────────────────────────
+   EXPERIENCE HOVER ISOLATION
+───────────────────────────────────── */
+const expList  = document.getElementById('exp-list');
+const jobCards = Array.from(expList.querySelectorAll('.job-card'));
+
+jobCards.forEach(card => {
+  card.addEventListener('mouseenter', () => {
+    expList.classList.add('is-hovered');
+    card.classList.add('job-active');
+  });
+  card.addEventListener('mouseleave', () => {
+    expList.classList.remove('is-hovered');
+    card.classList.remove('job-active');
+  });
+});
+
+/* ─────────────────────────────────────
+   MOBILE: INTERSECTIONOBSERVER FOCUS
+   (activates card when centered on screen)
+───────────────────────────────────── */
+const isMobile = () => window.matchMedia('(hover: none)').matches;
+
+const focusObserver = new IntersectionObserver((entries) => {
+  if (!isMobile()) return;
+  entries.forEach(entry => {
+    if (entry.intersectionRatio > 0.65) {
+      // clear others
+      jobCards.forEach(c => c.classList.remove('job-active'));
+      expList.classList.add('is-hovered');
+      entry.target.classList.add('job-active');
+    }
+  });
+}, { threshold: [0.65] });
+
+jobCards.forEach(c => focusObserver.observe(c));
+
+/* ─────────────────────────────────────
+   SCROLL REVEAL & MOBILE NAV SCROLL TRIGGER
+───────────────────────────────────── */
+const reveals = document.querySelectorAll('.reveal');
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      // stagger siblings
+      const delay = Array.from(reveals).indexOf(entry.target) * 35;
+      entry.target.style.transitionDelay = Math.min(delay, 200) + 'ms';
+      entry.target.classList.add('in-view');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12 });
+
+reveals.forEach(el => revealObserver.observe(el));
+
+// Reveal mobile contact icons when user scrolls past Hero
+const topNav = document.querySelector('nav');
+const heroSection = document.getElementById('hero');
+
+const heroObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) {
+      topNav.classList.add('is-scrolled');
+    } else {
+      topNav.classList.remove('is-scrolled');
+    }
+  });
+}, { threshold: 0, rootMargin: "-80px 0px 0px 0px" });
+
+heroObserver.observe(heroSection);
+
+/* ─────────────────────────────────────
+   NAV ACTIVE STATE
+───────────────────────────────────── */
+const navLinks = document.querySelectorAll('.nav-links a');
+const sections = document.querySelectorAll('#hero, #experience, #projects, #martech, #certifications, #awards, #education');
+
+const navObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      // Remove color highlight for nav elements
+    }
+  });
+}, { threshold: 0.25, rootMargin: '-10% 0px -60% 0px' });
+
+sections.forEach(s => navObserver.observe(s));
+</script>
+
+</body>
+</html>

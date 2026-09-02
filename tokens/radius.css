@@ -1,0 +1,8 @@
+:root{
+  --radius:10px;      /* cards, images, stat chips — the brand default */
+  --radius-sm:5px;    /* tags */
+  --radius-md:6px;    /* buttons, nav link hover */
+  --radius-pill:20px; /* date pills */
+  --radius-round:50%; /* FABs */
+  --hairline:1px; /* @kind spacing */
+}

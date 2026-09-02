@@ -1,0 +1,8 @@
+/* NPC webfonts.
+   SOURCE OF TRUTH: nabilpervez/resume index.html loads Cormorant Garamond + Outfit
+   from Google Fonts. Prata is a SUBSTITUTION for the "Nabil Pervez" wordmark face
+   (assets/wordmark-nabil-pervez.png) — the original binary was not supplied.
+   These are CDN @import rules rather than local @font-face because no font binaries
+   were provided with the brand assets. Drop .woff2 files into assets/fonts/ and
+   replace this file with real @font-face rules when they are available. */
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=Outfit:wght@200;300;400;500;600;700&family=Prata&display=swap");

@@ -1,0 +1,17 @@
+:root{
+  --sp-1:3px; --sp-2:6px; --sp-3:7px; --sp-4:10px; --sp-5:12px;
+  --sp-6:14px; --sp-7:16px; --sp-8:20px; --sp-9:22px; --sp-10:24px;
+  --sp-12:28px; --sp-14:32px; --sp-16:36px; --sp-20:40px; --sp-24:52px;
+  --sp-28:56px; --sp-32:72px; --sp-40:80px;
+
+  /* Layout */
+  --page-max:1100px; /* @kind spacing */
+  --page-pad:40px; /* @kind spacing */
+  --page-pad-mobile:22px; /* @kind spacing */
+  --nav-h:62px; /* @kind spacing */
+  --sidebar-w:260px; /* @kind spacing */
+  --grid-gap:52px; /* @kind spacing */
+  --card-pad:22px 24px; /* @kind spacing */
+  --card-gap:14px; /* @kind spacing */
+  --section-gap:56px; /* @kind spacing */
+}

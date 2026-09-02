@@ -1,0 +1,21 @@
+<!-- @dsCard group="Brand" viewport="700x220" name="Marks & containers" subtitle="N glyph, NPC monogram, badge / chip / tile treatments" -->
+<!DOCTYPE html><html data-theme="dark"><head><meta charset="utf-8"><link rel="stylesheet" href="../styles.css">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="../_ds_bundle.js"></script>
+<script src="card-theme.js"></script>
+<style>body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font-sans)}</style></head><body><div id="root"></div>
+<script type="text/babel">
+const DS = window.NPCDesignSystem_2f0ecd;
+const { Wordmark } = DS;
+const Cell = ({label, children}) => <div style={{display:'grid',justifyItems:'center',gap:8}}>{children}<span style={{fontSize:'.52rem',letterSpacing:'1.4px',textTransform:'uppercase',color:'var(--text-muted)'}}>{label}</span></div>;
+function Demo(){
+  const V=['badge','badge-npc','chip','chip-npc','tile','mark','npc'];
+  return <div style={{padding:'20px 18px',display:'flex',gap:22,alignItems:'flex-end',flexWrap:'wrap'}}>
+    {V.map(v=><Cell key={v} label={v}><Wordmark variant={v} size={v==='npc'?18:46} assetBase="../assets/" /></Cell>)}
+    <span style={{flex:1,minWidth:160,fontSize:'.52rem',letterSpacing:'1.2px',textTransform:'uppercase',color:'var(--text-muted)',lineHeight:1.9}}>Containers follow the page theme by default. The chip is the one inverse treatment: ink art on solid champagne.</span>
+  </div>;
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<Demo/>);
+</script></body></html>
