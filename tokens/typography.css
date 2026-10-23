@@ -1,52 +1,64 @@
+/* NPC type — 2026 direction (from the homepage, NabilPervez/npc-homepage-redesign).
+   ONE family: Outfit. Three weights with fixed jobs: 600 display · 500 UI/labels/buttons · 400 prose.
+   CLOSED scale: 62 / 32 / 24 / 22 / 18 / 16 / 14 / 13 px. No other sizes.
+   Hierarchy comes from colour (two-tone headlines), not from a second face or extra sizes.
+
+   Changed 2026-10-23: Cormorant Garamond is retired from screens. Old variable names are kept
+   and remapped onto the new scale so existing components keep working. */
 :root{
   /* Families */
-  --font-wordmark:'Prata',"Cormorant Garamond",serif;   /* lockups only */
-  --font-serif:'Cormorant Garamond',Georgia,serif;      /* headings, titles */
-  --font-sans:'Outfit',system-ui,sans-serif;            /* body + UI */
-  --font-mono:'Outfit',ui-monospace,monospace;           /* IDs, codes */
+  --font-sans:'Outfit',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --font-display:var(--font-sans);                 /* headlines: Outfit 600 */
+  --font-serif:var(--font-sans);                   /* RETIRED alias: older components asked for the serif */
+  --font-wordmark:'Prata','Outfit',serif;          /* the NABIL PERVEZ lockup only, never live UI */
+  --font-mono:'Outfit',ui-monospace,monospace;
 
-  /* Root scale — the resume sets html{font-size:15px}; rem values assume it */
-  --font-root:15px; /* @kind font */
+  --font-root:16px; /* @kind font */
 
-  /* Sizes (rem, against 15px root) */
-  --fs-micro:.64rem; /* @kind font */   /* stat labels, cert ids */
-  --fs-2xs:.65rem; /* @kind font */     /* skill category eyebrow */
-  --fs-xs:.70rem; /* @kind font */      /* tags */
-  --fs-sm:.72rem; /* @kind font */      /* nav links, eyebrows, footer */
-  --fs-base:.78rem; /* @kind font */    /* sidebar body, small copy */
-  --fs-md:.82rem; /* @kind font */      /* body copy, list items */
-  --fs-lg:.90rem; /* @kind font */      /* lead paragraph */
-  --fs-title:1.05rem; /* @kind font */  /* section head / card title */
-  --fs-title-lg:1.35rem; /* @kind font *//* nav wordmark */
-  --fs-display:clamp(3rem,7vw,5.2rem); /* @kind font */
-  --fs-display-sm:clamp(2.4rem,10vw,3.4rem); /* @kind font */
+  /* The closed scale */
+  --fs-62:clamp(34px,8.6vw,62px); /* @kind font */  /* hero h1 and closing band only */
+  --fs-32:clamp(24px,5.4vw,32px); /* @kind font */  /* statements, feature titles, big card titles */
+  --fs-24:clamp(22px,1.67vw,24px); /* @kind font */ /* section titles: they stay small */
+  --fs-22:22px; /* @kind font */
+  --fs-18:18px; /* @kind font */                     /* h3, ledes, quotes */
+  --fs-16:16px; /* @kind font */                     /* body */
+  --fs-14:14px; /* @kind font */                     /* secondary body, nav links, captions */
+  --fs-13:13px; /* @kind font */                     /* labels, pills, metadata */
+  --fs-stat:clamp(44px,13vw,62px); /* @kind font */ /* stat numbers on phones, 62 on desktop */
 
-  /* Weights */
-  --fw-light:300; /* @kind font */
-  --fw-regular:400; /* @kind font */
-  --fw-medium:500; /* @kind font */
-  --fw-semibold:600; /* @kind font */
-  --fw-bold:700; /* @kind font */
+  /* Old names, remapped onto the closed scale */
+  --fs-micro:var(--fs-13); --fs-2xs:var(--fs-13); --fs-xs:var(--fs-13);
+  --fs-sm:var(--fs-14); --fs-base:var(--fs-14); --fs-md:var(--fs-16); --fs-lg:var(--fs-18);
+  --fs-title:var(--fs-24); --fs-title-lg:var(--fs-32);
+  --fs-display:var(--fs-62); --fs-display-sm:var(--fs-62);
+
+  /* Weights: three, each with a job */
+  --fw-display:600; /* @kind font */
+  --fw-ui:500; /* @kind font */
+  --fw-text:400; /* @kind font */
+  --fw-light:400; --fw-regular:400; --fw-medium:500; --fw-semibold:600; --fw-bold:600;
 
   /* Line heights */
   --lh-display:1.04; /* @kind font */
   --lh-tight:1.25; /* @kind font */
-  --lh-snug:1.4; /* @kind font */
+  --lh-snug:1.35; /* @kind font */
   --lh-body:1.6; /* @kind font */
-  --lh-relaxed:1.75; /* @kind font */
+  --lh-relaxed:1.6; /* @kind font */
 
-  /* Tracking — the brand leans hard on wide uppercase tracking */
-  --ls-display:-1px; /* @kind font */
-  --ls-tight:.3px; /* @kind font */
-  --ls-wide:1.2px; /* @kind font */
-  --ls-wider:1.4px; /* @kind font */
-  --ls-widest:2.5px; /* @kind font */
+  /* Tracking */
+  --ls-display:-0.027em; /* @kind font */  /* every headline */
+  --ls-label:.14em; /* @kind font */       /* uppercase labels (eyebrows) */
+  --ls-tight:0; --ls-wide:.14em; --ls-wider:.14em; --ls-widest:.14em;
 
-  /* Ready-made roles */
-  --text-display:var(--fw-light) var(--fs-display)/var(--lh-display) var(--font-serif); /* @kind font */
-  --text-section:var(--fw-semibold) var(--fs-title)/1.2 var(--font-serif); /* @kind font */
-  --text-card-title:var(--fw-semibold) 1.08rem/var(--lh-tight) var(--font-serif); /* @kind font */
-  --text-body:var(--fw-regular) var(--fs-md)/var(--lh-body) var(--font-sans); /* @kind font */
-  --text-lead:var(--fw-light) var(--fs-lg)/var(--lh-relaxed) var(--font-sans); /* @kind font */
-  --text-eyebrow:var(--fw-medium) var(--fs-sm)/1 var(--font-sans); /* @kind font */
+  /* Ready-made roles (font shorthand) */
+  --text-display:var(--fw-display) var(--fs-62)/var(--lh-display) var(--font-sans); /* @kind font */
+  --text-statement:var(--fw-ui) var(--fs-32)/1.3 var(--font-sans); /* @kind font */
+  --text-section:var(--fw-display) var(--fs-24)/var(--lh-tight) var(--font-sans); /* @kind font */
+  --text-card-title:var(--fw-display) var(--fs-22)/var(--lh-tight) var(--font-sans); /* @kind font */
+  --text-h3:var(--fw-ui) var(--fs-18)/1.3 var(--font-sans); /* @kind font */
+  --text-lead:var(--fw-text) var(--fs-18)/var(--lh-body) var(--font-sans); /* @kind font */
+  --text-body:var(--fw-text) var(--fs-16)/var(--lh-body) var(--font-sans); /* @kind font */
+  --text-small:var(--fw-text) var(--fs-14)/1.5 var(--font-sans); /* @kind font */
+  --text-eyebrow:var(--fw-ui) var(--fs-13)/1.2 var(--font-sans); /* @kind font */
+  --text-label:var(--text-eyebrow); /* @kind font */
 }

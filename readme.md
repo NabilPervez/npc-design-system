@@ -2,7 +2,7 @@
 
 The brand system for **Nabil Pervez Consulting (NPC)**, the consultancy of Nabil Pervez — Founder and Principal Consultant, former Co-Founder / CTO of the award-winning agency **AOE Creative**, and currently AI Implementation SME & Content Producer at T-Mobile.
 
-NPC sells senior judgment to two audiences at once: **organizations** (company branding, web development, marketing consulting, IT consulting) and **individuals** (personal branding, career consulting), plus AI consulting, résumé building and paid speaking. The visual language has to read credible to a Fortune-500 marketing VP and aspirational to a mid-career professional. It does that with one move: **near-black cool navy ink, one champagne-gold accent, high-contrast serif display type, and hairline structure** — editorial luxury rather than SaaS.
+NPC sells senior creative and technical judgment — **Brand. Web. AI. Product.** — to growing companies: "a big-studio creative exec on your team, at a small-studio price." The visual language does it with **cool navy ink, one gold accent, the circle-lattice pattern, one clean sans (Outfit), hairline structure and slow, quiet motion** — Quiet Precision on NPC's own identity. *(Direction updated 2026-10-23 to follow the 2026 homepage; the earlier editorial serif look is retired.)*
 
 ---
 
@@ -10,7 +10,8 @@ NPC sells senior judgment to two audiences at once: **organizations** (company b
 
 | Source | What was taken |
 |---|---|
-| **github.com/NabilPervez/resume** (`index.html`, branch `main`) — the ground truth | The entire token layer: colour ramps, gradients, type stack, spacing, radii, shadows, easing, hover behaviour. Preserved verbatim in `reference/resume-source.html`. |
+| **github.com/NabilPervez/npc-homepage-redesign** — **the ground truth since 2026-10-23** | Type, scale, hairlines, radii, motion, offering colours, the 2026 components and rules. Live at npc-homepage-redesign.netlify.app. |
+| **github.com/NabilPervez/resume** (`index.html`, branch `main`) — the original ground truth | The entire token layer: colour ramps, gradients, type stack, spacing, radii, shadows, easing, hover behaviour. Preserved verbatim in `reference/resume-source.html`. |
 | `uploads/3.5x2_NPC_Card_Flat.pdf` → `assets/npc-business-card.pdf` | The print palette, extracted from the artwork's fill operators: `#131921` ink, `#2C2E35` panel, `#AC9760` champagne. Page geometry 270×162pt (3.75×2.25in with bleed). |
 | `uploads/Nabil_Full (1).png` → `assets/wordmark-nabil-pervez.png` | The "NABIL PERVEZ" wordmark, black on transparent, 6572×3072. |
 | `uploads/Nebtune-removebg-preview (1).png` → `assets/mark-nebtune-teal.png` | The "N" glyph, supplied in its original teal `#48A3C2`. |
@@ -20,7 +21,7 @@ NPC sells senior judgment to two audiences at once: **organizations** (company b
 | `uploads/nabil-headshot.jpg` → `assets/nabil-headshot.jpg` | The portrait. Now live in both UI kits. |
 | `https://nabilpervezconsulting.com/` | All division, speaker, keynote and case-study **copy** (supplied in the brief). The live site is client-rendered and returned no server HTML, so its layout could not be read from source — see the caveat below. |
 
-Anyone with access should read the résumé repo directly — it is the most complete expression of the brand in code, and re-reading it will produce better work than reading this summary alone.
+Anyone with access should read the homepage repo directly — it is now the most complete expression of the brand in code. The résumé repo remains the source of the colour ramps and the original marks.
 
 ---
 
@@ -36,7 +37,9 @@ Anyone with access should read the résumé repo directly — it is the most com
 
 **Named-brand credibility is used deliberately and often.** Riot Games, LEGO, Coca-Cola, Red Bull, Paramount Pictures, Activision Blizzard, T-Mobile, SypherPK. Client names do work that adjectives can't; the copy leans on them rather than on words like "world-class."
 
-**Casing.** Sentence case for sentences. **Title Case for headings and division names** ("Company Branding", "Keynote Topics", "The Agile Creative"). ALL CAPS only as a typographic device — eyebrows, section heads, nav links, button labels — never as emphasis inside a sentence.
+**Casing (2026).** Sentence case for sentences and most headings. **Headlines are 3–6 words and end with a period** ("How it works.", "In their words.", "Done right."); offering and section names may use Title Case where they read as a name ("One Agency. Four Ways We Help."). ALL CAPS only for 13px labels. Never as emphasis inside a sentence.
+
+**Two-tone headlines.** A short statement in full text colour, then a continuation in muted grey: "Brand. *Look the part.*" "Our work. *Award winning, made for brands of every size.*"
 
 **Calls to action are literal and repetitive by design.** "Explore Company Branding." "Explore Web Development." "Explore Marketing Solutions." The verb never changes; only the noun does. Speaker CTAs are two words: "Book Nabil", "Download Kit".
 
@@ -52,84 +55,114 @@ Anyone with access should read the résumé repo directly — it is the most com
 
 ---
 
-## VISUAL FOUNDATIONS
+## VISUAL FOUNDATIONS (2026 direction)
+
+**The brand moved on 2026-10-23.** The 2026 homepage (github.com/NabilPervez/npc-homepage-redesign,
+live at npc-homepage-redesign.netlify.app) is now the reference for how NPC looks everywhere.
+What stayed: the ink ground, the gold, the circle lattice, the gold N, the marks, the voice.
+What changed: one sans family instead of serif display, a closed type scale, neutral hairlines
+instead of gold ones, no shadows, soft 20px cards and pill controls, slower easing, and one colour
+per offering. The discipline is Cisco's *Quiet Precision* (Khyzr), applied to NPC's identity.
+Everything below is the rule; the old editorial values survive only as remapped token names.
 
 ### Colour
-One ground, one accent. **Cool navy-black ink** (`--ink-950 #07101F` on screen, `--ink-880 #0D1522` on brand artwork, `--ink-800 #131921` in print) and **champagne gold** (`--gold-300 #DDB84A` on screen, `--gold-500 #AB9563` — the measured brand champagne — in print and in all mark artwork). There is no third hue. No blues, no greens, no semantic red/amber/green set — nothing in the sources needs one, and adding one would break the identity. The teal `#48A3C2` in the original "N" file is a holdover: the brand-card artwork shows the same glyph in champagne, so **gold is the correct treatment** and teal should not appear anywhere.
+**One ground, one accent, plus offering colours that mean something.**
 
-Text is `#E2EAF4` at full strength and `#5E718F` muted — and **the muted grey carries most of the body copy**, which is why the pages read quiet. Emphasis inside muted paragraphs promotes words to full-strength text or to gold, never to a larger size.
+- Ground: ink `--ink-950 #07101F`. Raised surface `--bg-card #0D1522`, tile top `--bg-tile #121C2C`.
+- Text: `--text #E2EAF4`; **`--text-muted #8D9CB4` carries body copy** and the grey half of two-tone
+  headlines; `--text-faint #5E718F` for captions, unlit words and client names at rest.
+- Gold: one gradient, `--grad` (`#F5D97A → #DDB84A → #C88B20 → #E8B840`), for **one** thing per view:
+  the highlighted word, the primary button, the recommended card. Labels use champagne `--label #AB9563`.
+- **Offering colours** (the one sanctioned exception to "one accent"): each offering owns a hue family,
+  so a tile, pill, dot or rail border tells you the service without reading.
 
-Light theme (`[data-theme="light"]`) inverts to `--paper-100 #EEF2FA` with `--gold-700 #9A6A10` for contrast; `--gold-800 #8A5C08` is the mark tint that passes AA on paper. Dark is the product default, but **light is where the print identity lives** — the business card and the pattern artwork are both light-ground, so treat the two modes as equal citizens rather than a theme and its afterthought. Every specimen card in `guidelines/` carries a Dark/Light toggle in its top-right corner so both can be checked in place.
+| Offering | Tokens | Use |
+|---|---|---|
+| Brand | `--brand-a #DDB84A` `--brand-b #C88B20` `--brand-c #F5D97A` on `--brand-bg #2A1E06` | Gold family |
+| Web | `--web-a #3E7BE0` `--web-b #7FA8F0` `--web-c #B9D0F7` on `--web-bg #0B1C3A` | Blue family |
+| AI | `--ai-a #6C5CE7` `--ai-b #5FD3E8` `--ai-c #A79BF5` on `--ai-bg #140F33` | Violet + cyan |
+| Product | `--product-a #DDB84A` on ink | Drawn as a gold-hairline wireframe |
+
+Never use offering colours as decoration. Teal `#48A3C2` stays retired. Light theme
+(`[data-theme="light"]`, paper `#EEF2FA`, gold `--gold-700`) remains for print and documents.
 
 ### Type
-Three faces, strictly separated by job:
+**One family: Outfit.** Three weights with fixed jobs: **600 display, 500 UI/labels/buttons, 400 prose.**
+Root size 16px. **Closed scale: 62 / 32 / 24 / 22 / 18 / 16 / 14 / 13px. No other sizes.**
 
-- **Cormorant Garamond** (serif) — every headline, card title and section head. Weight **300** at display sizes with `-1px` tracking; weight **600 uppercase** at 2.5px tracking for section heads. Italic is the brand's emphasis device ("*Nabil* Pervez", "Scaling *Creativity* through Chaos").
-- **Outfit** (sans) — all body copy, UI, buttons, metrics. **300** for long paragraphs, 500 for inline emphasis, 600–700 for buttons and stat numbers.
-- **Prata** (display serif) — the wordmark lockup only. ⚠️ **Substitution** — see caveats.
+- 62 (`--fs-62`, `clamp(34px,8.6vw,62px)`): the hero headline and the closing band only.
+- 32 (`--fs-32`): statements, offering names, big card titles. Stat numbers use `--fs-stat` (44px on phones → 62).
+- 24 / 22: **section titles stay small**. "How it works." not a banner.
+- 18 h3 and ledes · 16 body · 14 secondary · 13 labels and pills.
+- Display tracking `-0.027em`; uppercase labels `.14em`. `text-wrap: balance` on titles, `pretty` on paragraphs; ledes max ~34ch.
+- **Two-tone headlines:** a short white statement plus a grey continuation —
+  "Brand. <span muted>Look the part.</span>" Hierarchy by colour, not size. Gold-gradient text marks one word at most.
+- Cormorant Garamond is **retired** from screens. Prata is kept only for the NABIL PERVEZ wordmark lockup.
 
-The root font size is **15px**, not 16. Every rem token in `tokens/typography.css` assumes it.
+### Space and layout
+- Container 1240px, gutter `clamp(20px,5vw,96px)` (20px on phones), section padding `clamp(72px,12vh,160px)`.
+- Spacing ladder 8 / 12 / 16 / 24 / 32 / 40 / 64.
+- **Section header:** title + one-line lede, split left/right on desktop or centred; 40px (64 desktop) to content.
+- **Mobile first.** Every section is designed at 375px first. Breakpoints at 760, 860 and 1000px.
+- Tap targets 44px minimum. No horizontal page scroll, ever.
 
-Wide uppercase letterspacing is the loudest brand tell: 2.5px on eyebrows and section heads, 1.4px on nav links, 1.2px on buttons and stat labels. If a design feels off-brand, it is usually because a label is set tight.
+### Surfaces
+- **Hairlines, not shadows.** 1px neutral `--hair #1C2638`; `--hair-2 #26324A` on pills and buttons. No drop shadows anywhere.
+- **Cards:** 20px radius, `--bg-card`→`--bg-tile` gradient or flat ink-2, one hairline. Flat at rest.
+- **Slabs with seams:** groups of tiles sit on a hairline-coloured ground with 1px gaps, so the seams draw the grid.
+- **Radii:** 20px cards · 14px photo tiles · 8px the nav N tile · 999px every pill and button.
+- **Blur:** only the frosted nav (`rgb(7 16 31/.82)` + `blur(18px)`) and caption pills over images.
+- **No grain overlay.** It was dropped for a lighter page on phones.
 
-### Backgrounds
-Flat ink, plus **a fixed fractal-noise overlay at 4% opacity over 55% layer opacity** (`--noise`, tiled at 180px) across the entire page. That grain is what keeps the flat dark from looking like a default dark mode — apply `.npc-grain` to `<body>` on every screen. **No decorative background gradients** — gradient is reserved for gold fills and gold text.
+### The pattern (circle lattice)
+Still the one ornament, now used in more places, always quiet:
+- **Hero:** full-bleed, dimmed (~12%), with two rings rippling outward and a clear radial field behind the lockup.
+- **Closing band:** the hero's ripple returns so the page ends where it began.
+- **Four-way tile:** the lattice re-drawn as thick arcs, one quadrant per offering colour.
+- **Step and buy cards:** faint (~18–28%), masked so it fades toward the content.
+Animate it only in the hero and the close.
 
-**The geometric pattern is the one ornament in the system.** Interlocking champagne circles, supplied as artwork; the tiling unit is a seamless 303×303 crop (`--pattern-tile`, scale in multiples). Three uses, in order of frequency:
-
-- `--pattern-opacity` **0.22** — full-bleed bands and split-layout panels. On the brand card it fills the left third of the sheet against a completely clear right side. That contrast is the point.
-- `--pattern-opacity-subtle` **0.08** — behind copy, or as a card backing.
-- `fade` — masked left-to-right so content sits on the clear side.
-
-Use it **once per view**. It reads as luxury only because most of the ink is doing nothing; spread across every section it becomes wallpaper. Reach for `PatternPanel` rather than hand-rolling the background.
-
-### Layout
-Fixed 1100px content column, 40px page padding (22px on mobile), a two-column `1fr / 260px` grid with a **52px** gutter and a **sticky sidebar** at `top: nav-h + 28px`. The header is fixed glass at **62px**. Utility FABs are fixed bottom-right at 32px inset. A single breakpoint at **860px** collapses to one column and reorders the stats and skills blocks above the main content; a second at 520px drops the stat grid to 2-up. Section rhythm is 56px.
-
-### Borders and hairlines
-Everything is separated by **1px `rgba(220,180,80,.20)`** — a gold-tinted hairline, never neutral grey. On hover it strengthens to `rgba(200,168,76,.38)`. The one heavier rule in the system is the **2px solid gold left border on lead paragraphs**. Section heads pair an uppercase gold title with a hairline running to the right edge.
-
-### Cards
-`--bg-card` fill, 1px gold hairline, **10px radius, and no shadow at rest.** Depth is exclusively a hover signal. That flatness is deliberate — the pages read as a printed document until you touch them.
-
-### Shadows
-Outer only; no inset shadows anywhere. `--shadow-card` `0 16px 40px rgba(0,0,0,.25)` on images and hero frames; `--shadow-card-hover` `0 12px 48px rgba(0,0,0,.38)` plus a 1px gold ring on hovered cards; `--shadow-fab-hover` is the one *coloured* shadow — a gold glow at 35%.
-
-### Radii
-`5px` tags · `6px` buttons and nav-link hover · `10px` cards, images, stat chips · `20px` date pills · `50%` FABs. Nothing between those values.
-
-### Transparency and blur
-Blur is used in exactly two places: the fixed nav (`blur(18px) saturate(160%)` over `rgba(7,16,31,.78)`) and the FABs (`blur(14px)`). Never on cards, never on modals, never as decoration. Transparency otherwise appears only in hairlines, `--gold-dim` fills and the shine sweep.
-
-Protection gradients: a bottom-up ink fade (`--protect-bottom`) is the pattern for text over imagery. The brand does **not** use capsules or scrims behind text.
-
-### Animation
-One curve for everything: `cubic-bezier(.4, 0, .2, 1)`.
-
-- `0.20s` colour, opacity, FAB scale
-- `0.25s` card lift and shadow
-- `0.35s` theme change and sibling dimming
-- `0.55s` the shine sweep
-- `0.60s` scroll reveal — fade up from `translateY(24px)`, triggered by `IntersectionObserver`
-- entrance: `fadeDown` for the nav (0.2s / 0.35s stagger), `fadeUp` for hero and FABs (0.4s / 1.2s delay)
-- `4s` linear infinite shimmer across gold gradient text (`.npc-gold-text`)
-
-No bounces, no springs, no overshoot, no parallax. Everything fades and translates a short distance. `prefers-reduced-motion: reduce` kills all of it, globally.
-
-### Hover states
-**The signature interaction is hover isolation.** When any card in a stack is hovered, its siblings drop to **0.28 opacity** while the hovered card lifts `-2px`, scales `1.012`, gains the gold border and the deep shadow, and a **diagonal champagne shine wipes across it** (`skewX(-12deg)`, left `-100%` → `160%`). Bullet text inside promotes from muted to full-strength, and bolded metrics turn gold. Nothing else on the page moves.
-
-Elsewhere: nav links fill with `--gold-dim` and brighten to full text colour. Tags shift border and text to gold without moving. Primary buttons drop to 88% opacity and lift 1px — the gradient never changes. FABs invert to a solid gold fill, scale 1.12 and glow.
-
-### Press states
-Understated: the press state settles the 1px lift back to zero with a `0.985` scale. No colour change, no ripple.
+### Motion
+**Fades and reveals only: noticed, never showy.** `--ease: cubic-bezier(.16,1,.3,1)`.
+- Scroll reveal: opacity 0→1 with a 30px rise over 900ms, 140ms stagger. Content is visible without JS
+  (the hidden start state needs a `js` class on `<html>`).
+- Hover 400–500ms; press `scale(.97)`; active-state changes ~800ms.
+- Loops (client names, work reel, testimonials) drift linearly, **pause on hover, focus and touch, and have a pause button**.
+- Line drawings draw in with `stroke-dasharray` on `pathLength="1"`. Select them by element or class,
+  **never `[pathLength]`** (minifiers lowercase it; SVG attributes are case-sensitive).
+- `prefers-reduced-motion: reduce` stops everything; loops collapse to one static set.
+- Retired: hover isolation (siblings dimming), the card lift and the diagonal shine sweep. Touch-first pages have no hover.
 
 ### Imagery
-**Warm, not cool.** The supplied portrait is shot in tungsten light — amber bokeh, deep shadow, a tan-and-caramel palette against a dark interior. That warmth is deliberate and it is what makes photography sit naturally next to champagne gold; a cool or blue-graded image would fight the palette. Shallow depth of field, subject centred, eye-level, no hard flash.
+- Warm photography stays (tungsten, shallow depth) — it sits naturally next to gold.
+- **Work tiles:** real portfolio images at 720/480px WebP with `srcset`, `loading="lazy"`, width and height set,
+  14px radius, a hairline ring, and a caption pill (offering in its colour + client).
+- **Portrait:** 2:3, 14px radius, slight desaturation `grayscale(.2)`, always beside its text (never alone in a column).
+- **Showpiece:** the isometric gold trophy (anatomy kit) for awards: ink plinth, 5-step gold ramp, glints. Load heavy art as its own chunk.
+- Check every image for brands the client has excluded (**T-Mobile stays off NPC pages**).
 
-Frames: **10px radius, 1px gold hairline, `--shadow-card`, `object-fit: cover`**, on a `--bg-card` backing — 260×340 in the résumé hero, 260×320 on the site hero. Greyscale (`grayscale(1) contrast(1.05)`) is the fallback when a portrait must not compete with gold. Never tint an image gold, and never put type directly on a photo without `--protect-bottom`.
+### Components (2026)
+- **Nav:** frosted ink bar; N tile + "NPC"; centred links; gold pill CTA. Phones: N, gold **Book now**, menu button opening a native `<dialog>` sheet.
+- **Card hero:** the business card alive — lattice, ripple rings, gold N breathing, "Brand. Web. AI. Product. *Done right.*"
+- **Proof strip:** big stat numbers (count up once, gold `+`) beside two rows of client names drifting in opposite directions.
+- **Scroll-fill statement:** a positioning paragraph that lights word by word, paired in one row with a proof object.
+- **Four-way lattice tile:** 2×2 offerings in their colours; copy either side on desktop; a swipe rail with dots on phones; tap a quadrant to jump.
+- **Buy cards:** two equal cards for the two ways to buy; the recommended one is solid gold with ink text.
+- **Bento reel:** columns of height H (tall .62H, stack .9H, wide 1.4H, square H), slow drift, native swipe, pause.
+- **Step cards:** three steps with literal, spare line drawings on a faint lattice card.
+- **Testimonial drift:** many short quotes in an endless row.
+- **About row:** portrait and two-tone statement side by side at every width.
+- **Closing band** and **colophon footer** (brand · navigate · offer · contact).
 
-Only one photograph exists so far. Additional imagery should match its temperature and depth of field.
+### Rules learned (keep these)
+1. Review on a real phone at 375px every round.
+2. Swipe beats stack: four long blocks on a phone become one rail with dots.
+3. The main CTA lives in the phone nav.
+4. Big numbers must be big: the stat is the largest type in its block.
+5. Show proof, don't explain it: one object and one line.
+6. Line drawings stay literal and spare.
+7. Everything visible without JS; everything still under reduced motion.
+8. Only real claims (one award on record: Tempest Award, Best Social Experience). Client logos stay typeset until licensed art exists.
 
 ---
 
@@ -146,11 +179,11 @@ Only one photograph exists so far. Additional imagery should match its temperatu
 ⚠️ **Flagged substitution:** Lucide stands in for the hand-inlined Feather paths. Geometry and stroke weight match; a handful of Feather names were renamed in Lucide (`external-link` is stable; `download-cloud` is stable; check before use).
 
 Rules:
-- **Sizes: 13px** inside buttons, **17–18px** in FABs and contact rows, **20px** on division cards. Never larger — icons never become illustration.
+- **Sizes: 13–14px** inside buttons and pills, **18px** in contact rows, **24px** on cards. Icons never become illustration; illustration is the line-drawing style (hairline strokes, one gold accent).
 - **Colour: `currentColor`.** Gold in FABs and division cards, muted in contact rows, ink on gold button fills.
 - **No icon font, no sprite sheet, no PNG icons** in the sources.
 - **No emoji.** The only glyph-as-icon usages are the gold `★` prefix on awards, the `—` em dash as the bullet marker, and `↗` appended to outbound link labels.
-- **Never draw a client logo.** The trusted-by wall sets client names in muted uppercase Cormorant. No licensed client art was supplied and third-party marks must not be reconstructed.
+- **Never draw a client logo.** Client names are set in Outfit 600, faint ink, in drifting rows. No licensed client art was supplied and third-party marks must not be reconstructed.
 
 ### Brand marks in `assets/`
 
@@ -205,62 +238,6 @@ Container variants (`badge`, `chip`, `tile`) take `ground="auto"` by default and
 
 ---
 
-## WEB LAYER — Quiet Precision on NPC (added 2026-10-23)
-
-A second register for **marketing websites**, proven on the 2026 homepage
-(github.com/NabilPervez/npc-homepage-redesign, live at npc-homepage-redesign.netlify.app).
-It keeps the identity — ink ground, champagne/gold, the circle lattice, the gold N, the
-voice — and swaps the editorial résumé discipline for Cisco's *Quiet Precision* layout
-discipline. Everything above still applies to the résumé, documents, decks and print.
-Use this layer when the job is a website that has to sell and work on a phone.
-
-Tokens live in `tokens/web.css`, scoped to `.npc-web` so they never change the editorial
-layer. Specimens: `guidelines/web-offerings.html`, `guidelines/web-type-scale.html`.
-The full build is described in `ui_kits/homepage-2026/README.md`.
-
-### Where the web layer deliberately differs from the editorial layer
-
-| Topic | Editorial (résumé) | Web layer | Why |
-|---|---|---|---|
-| Type | Cormorant display + Outfit body, 15px root | **Outfit only**, 600 display / 500 UI / 400 prose, 16px root | One family reads faster on phones; hierarchy comes from colour, not a second face |
-| Scale | rem steps against 15px | **Closed px scale 62/32/24/22/18/16/14/13** | Fewer sizes, every page looks related |
-| Headlines | Serif, italic emphasis | **Two-tone**: short white statement + grey continuation ("Brand. *Look the part.*") | Hierarchy by colour, not size |
-| Section titles | Uppercase gold serif with rule | **Small (22–24px)**, sentence case, period: "How it works." Only the hero is big | Calm pages; the hero does the shouting |
-| Hairlines | Gold-tinted `rgba(220,180,80,.2)` | **Neutral ink hairlines** `#1C2638` | Gold is saved for the one accent per view |
-| Accent colours | Gold only | Gold, plus **one hue family per offering** (Brand gold, Web blue, AI violet/cyan, Product gold outline) | Colour carries meaning: a tile, pill or dot tells you which service |
-| Pattern | Once per view | Hero, the closing band, the four-way tile and the step cards — always faint or masked, and animated only in hero and close | The lattice is the brand's own texture; used quiet, it reads as brand, not wallpaper |
-| Motion | `cubic-bezier(.4,0,.2,1)`, 0.2–0.6s | **`cubic-bezier(.16,1,.3,1)`**, ~900ms enters, 140ms stagger, 30px rise | Slow, physical; noticed but never showy |
-| Hover isolation | Signature | Not used | Touch-first pages have no hover |
-| Grain overlay | Always | Not used | Kept the page lighter on phones |
-
-### Components the web layer adds
-
-- **Card hero** — the business card full-bleed: lattice, two ripple rings washing outward, a clear radial field behind the lockup, gold N breathing, gold headline shimmer.
-- **Proof strip** — big stat numbers (count up once, gold `+`) beside two rows of client names drifting in opposite directions; a 44px pause button (WCAG 2.2.2).
-- **Scroll-fill statement** — a paragraph in `--web-hair-2` that lights to full text word by word as it crosses the screen.
-- **Four-way lattice tile** — a 2×2 of the circle lattice, one offering per quadrant in its own hue; copy either side on desktop; on phones a swipe rail with dots, and tapping a quadrant jumps the rail.
-- **Buy cards** — two equal cards for the two ways to buy; the recommended one is a solid gold-gradient card with ink text and a multiplied lattice fading in from the right.
-- **Bento reel** — columns of height H (`tall` .62H, `stack` .9H, `wide` 1.4H, `sq` H), each tile tagged with offering pill + client; slow rAF drift on a real scroller, paused by hover, focus, touch or a button; one still set under reduced motion.
-- **Step drawings** — line illustrations on a faint lattice card (hairline strokes, one gold accent), drawn in with `stroke-dasharray` on `pathLength="1"`.
-- **Testimonial drift** — cards in an endless CSS marquee, held on hover/touch/focus, with a pause button.
-- **Isometric trophy** — built with the anatomy kit, recoloured through CSS variables: plinth in ink, turned parts in a 5-step gold ramp, glints that twinkle.
-- **Phone nav** — mark, gold "Book now" and a menu button that opens a native `<dialog>` sheet (focus trap and Esc for free).
-
-### Rules learned building it
-
-1. **Phones first, every section.** Test at 375px before calling anything done; no horizontal scroll, 44px+ tap targets.
-2. **Swipe beats stack.** Where a phone would show four long blocks in a row, use one swipe rail with dots instead.
-3. **Big numbers must be big.** A stat is the largest type in its block; labels are 13px caps under it.
-4. **Show, don't explain, the award.** A single object (the trophy) with one line beats a case-study paragraph.
-5. **Everything visible without JS.** Reveal states only hide content once a `js` class is on `<html>`.
-6. **Respect reduced motion everywhere.** Drift, ripples, gleam and draw-ins all stop; loops collapse to one static set.
-7. **Never style SVG by `[pathLength]`.** Minifiers lowercase attribute selectors and SVG attributes are case-sensitive; select by element or class.
-8. **Keep T-Mobile off the site** (Nabil, v7). Check every new image for it.
-9. **Only real claims.** The Tempest Award (Best Social Experience, Houston Outlaws #BandTogether) is the award on record; don't invent others.
-10. **Client logos stay typeset** until licensed artwork exists.
-
----
-
 ## Index
 
 ```
@@ -271,7 +248,7 @@ SKILL.md                Agent Skills wrapper
 github.md               upstream source association + sync receipt
 
 tokens/
-  fonts.css             webfont loading (CDN — see caveats)
+  fonts.css             webfont loading: Outfit (+ Prata for the wordmark lockup)
   colors.css            ink / paper / gold ramps, semantic aliases, gradients, light theme
   typography.css        families, sizes, weights, line heights, tracking, ready-made roles
   spacing.css           spacing scale + layout frame
@@ -279,7 +256,7 @@ tokens/
   elevation.css         shadows + blur
   motion.css            easing, durations, keyframes, reduced-motion
   base.css              reset, body, links, .npc-grain, .npc-gold-text
-  web.css               web layer (Quiet Precision), scoped to .npc-web
+  web.css               the homepage tokens under their --web-* names (now global)
 
 assets/                 wordmark + mark variants, business-card PDF
 reference/
@@ -313,9 +290,11 @@ Every family above has a counterpart in the sources: the résumé defines Card, 
 
 ## CAVEATS — things to fix with real assets
 
-1. **The wordmark font is a substitution.** `assets/wordmark-nabil-pervez.png` is a high-contrast display serif with flared terminals that is not on Google Fonts. **Prata** is the closest available match and is what `--font-wordmark` resolves to. It is close in contrast and spirit but not the same face. The `type` variant's N→Z justification is measurement-driven, so it will keep working when the real face is dropped in — only the letterforms change.
-2. **No font binaries were provided.** `tokens/fonts.css` loads Cormorant Garamond, Outfit and Prata from the Google Fonts CDN — matching what the résumé source does — rather than shipping local `@font-face` rules. Drop `.woff2` files into `assets/fonts/` and rewrite that one file to make the system self-contained and offline-capable.
+1. **The wordmark font is a substitution** (lockup only; all live type is Outfit). `assets/wordmark-nabil-pervez.png` is a high-contrast display serif with flared terminals that is not on Google Fonts. **Prata** is the closest available match and is what `--font-wordmark` resolves to. It is close in contrast and spirit but not the same face. The `type` variant's N→Z justification is measurement-driven, so it will keep working when the real face is dropped in — only the letterforms change.
+2. **No font binaries were provided.** `tokens/fonts.css` loads Outfit and Prata from the Google Fonts CDN — matching what the résumé source does — rather than shipping local `@font-face` rules. Drop `.woff2` files into `assets/fonts/` and rewrite that one file to make the system self-contained and offline-capable.
 3. **The live site's layout was not read from source.** `nabilpervezconsulting.com` is client-rendered and served no HTML to read. The consulting-site UI kit reproduces the supplied copy inside the résumé's proven visual language; section order, hero treatment and any patterns unique to the live site are inferred, not copied.
 4. **No client logo art.** The trusted-by wall sets client names in muted uppercase Cormorant. Third-party marks must not be reconstructed, so this stays type until licensed art exists.
 5. **No semantic status colours.** Nothing in the sources needed success / warning / error. If a product surface requires them, they need to be designed, not guessed.
 6. **One photograph.** The portrait is the only image in the system. Everything documented under Imagery is generalised from that single frame.
+7. **Components were remapped, not redrawn.** The older components (`components/`) pick up the 2026 tokens through remapped names (serif → Outfit, gold hairlines → neutral, 10px → 20px radius, shadows → none). Their markup still reflects the résumé; for new work, build from the 2026 component list and the homepage repo.
+8. **The consulting-site and résumé UI kits** show the earlier editorial direction and are kept for reference.

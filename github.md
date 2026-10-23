@@ -25,3 +25,15 @@ date: 2026-08-31T14:05:36Z
 | `components/navigation/*` | `index.html` — `nav`, `.fab`, `.fab-btn` |
 | `guidelines/*.html` | `index.html` — token values and hover/motion rules |
 | `ui_kits/consulting-site/*` | nabilpervezconsulting.com copy (not repo-derived); styling from `index.html` |
+
+## 2026-10-23 · Direction change
+
+repo: NabilPervez/npc-homepage-redesign (branch main) is now the ground truth.
+
+- Tokens moved to the homepage style: Outfit only, closed 62/32/24/22/18/16/14/13 scale, neutral
+  hairlines, no shadows, 20px cards and pill controls, `cubic-bezier(.16,1,.3,1)`, offering colours.
+  Old token names are kept and remapped so existing components still resolve.
+- Kept: ink and gold ramps, the lattice pattern, every mark and asset, the voice.
+- Retired: Cormorant Garamond on screen, gold-tinted hairlines, shadows, grain, hover isolation and
+  shine sweep. Four specimen cards regrouped as "Retired (pre-2026)".
+- New: PROMPT.md (copy-paste starter prompt), rebuilt index.html, rewritten readme foundations.
