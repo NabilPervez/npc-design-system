@@ -205,6 +205,62 @@ Container variants (`badge`, `chip`, `tile`) take `ground="auto"` by default and
 
 ---
 
+## WEB LAYER — Quiet Precision on NPC (added 2026-10-23)
+
+A second register for **marketing websites**, proven on the 2026 homepage
+(github.com/NabilPervez/npc-homepage-redesign, live at npc-homepage-redesign.netlify.app).
+It keeps the identity — ink ground, champagne/gold, the circle lattice, the gold N, the
+voice — and swaps the editorial résumé discipline for Cisco's *Quiet Precision* layout
+discipline. Everything above still applies to the résumé, documents, decks and print.
+Use this layer when the job is a website that has to sell and work on a phone.
+
+Tokens live in `tokens/web.css`, scoped to `.npc-web` so they never change the editorial
+layer. Specimens: `guidelines/web-offerings.html`, `guidelines/web-type-scale.html`.
+The full build is described in `ui_kits/homepage-2026/README.md`.
+
+### Where the web layer deliberately differs from the editorial layer
+
+| Topic | Editorial (résumé) | Web layer | Why |
+|---|---|---|---|
+| Type | Cormorant display + Outfit body, 15px root | **Outfit only**, 600 display / 500 UI / 400 prose, 16px root | One family reads faster on phones; hierarchy comes from colour, not a second face |
+| Scale | rem steps against 15px | **Closed px scale 62/32/24/22/18/16/14/13** | Fewer sizes, every page looks related |
+| Headlines | Serif, italic emphasis | **Two-tone**: short white statement + grey continuation ("Brand. *Look the part.*") | Hierarchy by colour, not size |
+| Section titles | Uppercase gold serif with rule | **Small (22–24px)**, sentence case, period: "How it works." Only the hero is big | Calm pages; the hero does the shouting |
+| Hairlines | Gold-tinted `rgba(220,180,80,.2)` | **Neutral ink hairlines** `#1C2638` | Gold is saved for the one accent per view |
+| Accent colours | Gold only | Gold, plus **one hue family per offering** (Brand gold, Web blue, AI violet/cyan, Product gold outline) | Colour carries meaning: a tile, pill or dot tells you which service |
+| Pattern | Once per view | Hero, the closing band, the four-way tile and the step cards — always faint or masked, and animated only in hero and close | The lattice is the brand's own texture; used quiet, it reads as brand, not wallpaper |
+| Motion | `cubic-bezier(.4,0,.2,1)`, 0.2–0.6s | **`cubic-bezier(.16,1,.3,1)`**, ~900ms enters, 140ms stagger, 30px rise | Slow, physical; noticed but never showy |
+| Hover isolation | Signature | Not used | Touch-first pages have no hover |
+| Grain overlay | Always | Not used | Kept the page lighter on phones |
+
+### Components the web layer adds
+
+- **Card hero** — the business card full-bleed: lattice, two ripple rings washing outward, a clear radial field behind the lockup, gold N breathing, gold headline shimmer.
+- **Proof strip** — big stat numbers (count up once, gold `+`) beside two rows of client names drifting in opposite directions; a 44px pause button (WCAG 2.2.2).
+- **Scroll-fill statement** — a paragraph in `--web-hair-2` that lights to full text word by word as it crosses the screen.
+- **Four-way lattice tile** — a 2×2 of the circle lattice, one offering per quadrant in its own hue; copy either side on desktop; on phones a swipe rail with dots, and tapping a quadrant jumps the rail.
+- **Buy cards** — two equal cards for the two ways to buy; the recommended one is a solid gold-gradient card with ink text and a multiplied lattice fading in from the right.
+- **Bento reel** — columns of height H (`tall` .62H, `stack` .9H, `wide` 1.4H, `sq` H), each tile tagged with offering pill + client; slow rAF drift on a real scroller, paused by hover, focus, touch or a button; one still set under reduced motion.
+- **Step drawings** — line illustrations on a faint lattice card (hairline strokes, one gold accent), drawn in with `stroke-dasharray` on `pathLength="1"`.
+- **Testimonial drift** — cards in an endless CSS marquee, held on hover/touch/focus, with a pause button.
+- **Isometric trophy** — built with the anatomy kit, recoloured through CSS variables: plinth in ink, turned parts in a 5-step gold ramp, glints that twinkle.
+- **Phone nav** — mark, gold "Book now" and a menu button that opens a native `<dialog>` sheet (focus trap and Esc for free).
+
+### Rules learned building it
+
+1. **Phones first, every section.** Test at 375px before calling anything done; no horizontal scroll, 44px+ tap targets.
+2. **Swipe beats stack.** Where a phone would show four long blocks in a row, use one swipe rail with dots instead.
+3. **Big numbers must be big.** A stat is the largest type in its block; labels are 13px caps under it.
+4. **Show, don't explain, the award.** A single object (the trophy) with one line beats a case-study paragraph.
+5. **Everything visible without JS.** Reveal states only hide content once a `js` class is on `<html>`.
+6. **Respect reduced motion everywhere.** Drift, ripples, gleam and draw-ins all stop; loops collapse to one static set.
+7. **Never style SVG by `[pathLength]`.** Minifiers lowercase attribute selectors and SVG attributes are case-sensitive; select by element or class.
+8. **Keep T-Mobile off the site** (Nabil, v7). Check every new image for it.
+9. **Only real claims.** The Tempest Award (Best Social Experience, Houston Outlaws #BandTogether) is the award on record; don't invent others.
+10. **Client logos stay typeset** until licensed artwork exists.
+
+---
+
 ## Index
 
 ```
@@ -223,6 +279,7 @@ tokens/
   elevation.css         shadows + blur
   motion.css            easing, durations, keyframes, reduced-motion
   base.css              reset, body, links, .npc-grain, .npc-gold-text
+  web.css               web layer (Quiet Precision), scoped to .npc-web
 
 assets/                 wordmark + mark variants, business-card PDF
 reference/
@@ -249,6 +306,7 @@ Every family above has a counterpart in the sources: the résumé defines Card, 
 ### UI kits
 
 - **`ui_kits/consulting-site/`** — nabilpervezconsulting.com. Three click-through routes: home (hero + trusted-by + divisions), speaker profile (hero + story + six keynote cards), case studies (discipline filter + grid).
+- **`ui_kits/homepage-2026/`** — the 2026 homepage on the web layer (React app; README maps every section to its component).
 - **`ui_kits/resume/`** — faithful recreation of the résumé repo, including hover isolation, shine sweep and the live light/dark toggle.
 
 ---

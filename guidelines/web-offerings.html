@@ -1,0 +1,31 @@
+<!-- @dsCard group="Web layer" viewport="700x300" name="Offering colours + lattice tile" subtitle="One hue family per offering: Brand, Web, AI, Product" -->
+<!DOCTYPE html><html data-theme="dark"><head><meta charset="utf-8"><link rel="stylesheet" href="../styles.css"><style>
+body{margin:0;background:#07101F;color:#E2EAF4;padding:16px 18px}
+.w{display:grid;grid-template-columns:200px minmax(0,1fr);gap:20px;align-items:center}
+.tile{display:grid;grid-template-columns:1fr 1fr;aspect-ratio:1;border-radius:4px;overflow:hidden}
+.tile svg{display:block;width:100%;height:100%}
+.rows{display:grid;gap:10px;min-width:0}
+.row{display:grid;grid-template-columns:64px repeat(4,minmax(0,1fr));gap:6px;align-items:center;font-size:11px}
+.row b{font-weight:600;font-size:13px}
+.sw{min-width:0;overflow:hidden;white-space:nowrap;height:34px;border-radius:5px;display:flex;align-items:flex-end;padding:4px 6px;font-size:9.5px;letter-spacing:.3px}
+.lbl{grid-column:1/-1;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#5E718F}
+</style><script src="card-theme.js"></script></head><body class="npc-web"><div class="w">
+<div class="tile" id="tile"></div>
+<div class="rows">
+<div class="row"><b>Brand</b><div class="sw" style="background:#2A1E06;color:#DDB84A">bg #2A1E06</div><div class="sw" style="background:#C88B20;color:#07101F">#C88B20</div><div class="sw" style="background:#DDB84A;color:#07101F">#DDB84A</div><div class="sw" style="background:#F5D97A;color:#07101F">#F5D97A</div></div>
+<div class="row"><b>Web</b><div class="sw" style="background:#0B1C3A;color:#7FA8F0">bg #0B1C3A</div><div class="sw" style="background:#3E7BE0;color:#07101F">#3E7BE0</div><div class="sw" style="background:#7FA8F0;color:#07101F">#7FA8F0</div><div class="sw" style="background:#B9D0F7;color:#07101F">#B9D0F7</div></div>
+<div class="row"><b>AI</b><div class="sw" style="background:#140F33;color:#A79BF5">bg #140F33</div><div class="sw" style="background:#6C5CE7;color:#E2EAF4">#6C5CE7</div><div class="sw" style="background:#5FD3E8;color:#07101F">#5FD3E8</div><div class="sw" style="background:#A79BF5;color:#07101F">#A79BF5</div></div>
+<div class="row"><b>Product</b><div class="sw" style="background:#07101F;color:#DDB84A;box-shadow:inset 0 0 0 1px #26324A">ink</div><div class="sw" style="background:transparent;color:#DDB84A;box-shadow:inset 0 0 0 1px #DDB84A">gold hairline</div><div></div><div></div></div>
+<div class="lbl">Colour = meaning: tile, pill, dot and rail border all use the offering's family. Never decorative.</div>
+</div></div>
+<script>
+// The quadrant: the NPC circle lattice (circles of r = S/2 on the corners and centre), drawn as thick arcs.
+const S=240, C=[[0,0],[S,0],[0,S],[S,S],[S/2,S/2]];
+const q={brand:['#2A1E06',['#C88B20','#DDB84A','#F5D97A']],ai:['#140F33',['#6C5CE7','#5FD3E8','#A79BF5']],web:['#0B1C3A',['#3E7BE0','#7FA8F0','#B9D0F7']]};
+const quad=(id)=>{
+  if(id==='product') return `<svg viewBox="0 0 ${S} ${S}"><rect width="${S}" height="${S}" fill="#07101F"/>${C.map(([x,y])=>`<circle cx="${x}" cy="${y}" r="${S/2-12}" fill="none" stroke="#DDB84A" stroke-width="1.6"/><circle cx="${x}" cy="${y}" r="${S/2+12}" fill="none" stroke="#DDB84A" stroke-width="1.6"/>`).join('')}</svg>`;
+  const [bg,cs]=q[id];
+  return `<svg viewBox="0 0 ${S} ${S}"><rect width="${S}" height="${S}" fill="${bg}"/>${C.map(([x,y],i)=>`<circle cx="${x}" cy="${y}" r="${S/2}" fill="none" stroke="${cs[i%3]}" stroke-width="26"/>`).join('')}</svg>`;
+};
+document.getElementById('tile').innerHTML=['brand','ai','web','product'].map(quad).join('');
+</script></body></html>
